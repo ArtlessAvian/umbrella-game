@@ -1,6 +1,5 @@
 package com.artlessavian.umbrellagame.game.playerstates;
 
-import com.artlessavian.umbrellagame.game.Map;
 import com.artlessavian.umbrellagame.game.State;
 import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
@@ -32,7 +31,12 @@ public class WalkState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
-		if (e.controlC.control.a)
+		if (e.controlC.control.dash)
+		{
+			sm.state = new DashState(sm, e);
+			return true;
+		}
+		if (e.controlC.control.jump)
 		{
 			sm.state = new JumpState(sm, e, true);
 			return true;

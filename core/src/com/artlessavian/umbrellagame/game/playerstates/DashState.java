@@ -9,23 +9,25 @@ public class DashState extends State<Player>
 	public DashState(StateMachine sm, Player player)
 	{
 		super(sm, player);
-	}
 
-	@Override
-	public void enter()
-	{
-
-	}
-
-	@Override
-	public void exit()
-	{
-
+		e.physicsC.vel.x = 200;
+		if (e.controlC.control.left)
+		{
+			e.physicsC.vel.x *= -1;
+		}
 	}
 
 	@Override
 	public boolean checkTransition()
 	{
+		if (!e.controlC.control.dash)
+		{
+			e.stateC.state = new StandState(sm, e);
+		}
+		if (e.controlC.control.jump)
+		{
+			e.stateC.state = new JumpState(sm, e, true);
+		}
 		return false;
 	}
 

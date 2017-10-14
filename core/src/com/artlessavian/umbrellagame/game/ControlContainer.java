@@ -11,10 +11,9 @@ public class ControlContainer
 	public boolean left;
 	public boolean right;
 
-	public boolean a;
-	public boolean b;
-	public boolean x;
-	public boolean y;
+	public boolean jump;
+	public boolean swing;
+	public boolean dash;
 
 	public boolean start;
 	public boolean select;

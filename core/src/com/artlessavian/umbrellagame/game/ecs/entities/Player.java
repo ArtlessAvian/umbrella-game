@@ -4,6 +4,7 @@ import com.artlessavian.umbrellagame.game.ControlContainer;
 import com.artlessavian.umbrellagame.game.ecs.components.*;
 import com.artlessavian.umbrellagame.game.playerstates.*;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity
@@ -35,6 +36,7 @@ public class Player extends Entity
 
 		playerC = new PlayerComponent();
 		spriteC = new SpriteComponent();
+		spriteC.sprite.setTexture(new Texture("Grid.png"));
 		spriteC.sprite.setSize(16, 32);
 		stateC = new StateComponent();
 		stateC.state = new FloatState(stateC, this);

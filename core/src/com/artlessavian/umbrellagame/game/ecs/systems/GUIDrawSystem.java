@@ -15,7 +15,7 @@ public class GUIDrawSystem extends EntitySystem
 	private final BitmapFont font;
 	private Player p;
 
-	private OrthographicCamera screenSpace = new OrthographicCamera(800, 450);
+	static OrthographicCamera screenSpace = new OrthographicCamera(800, 450);
 
 	public GUIDrawSystem(SpriteBatch batch, BitmapFont font, Player p)
 	{
@@ -23,6 +23,7 @@ public class GUIDrawSystem extends EntitySystem
 		this.font = font;
 		this.p = p;
 
+		screenSpace = new OrthographicCamera(800, 450);
 		screenSpace.position.set(400, 225, 0);
 		screenSpace.update();
 	}

@@ -34,8 +34,9 @@ public class Maineroni extends Game
 
 		if (onComputerDebug)
 		{
-			control.a = Gdx.input.isKeyPressed(Input.Keys.J);
-			control.b = Gdx.input.isKeyPressed(Input.Keys.N);
+			control.jump = Gdx.input.isKeyPressed(Input.Keys.J);
+			control.swing = Gdx.input.isKeyPressed(Input.Keys.N);
+			control.dash = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
 			control.up = Gdx.input.isKeyPressed(Input.Keys.W);
 			control.down = Gdx.input.isKeyPressed(Input.Keys.S);
 			control.left = Gdx.input.isKeyPressed(Input.Keys.A);

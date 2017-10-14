@@ -27,7 +27,7 @@ public class StandState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
-		if (e.controlC.control.a)
+		if (e.controlC.control.jump)
 		{
 			sm.state = new JumpState(sm, e, true);
 			return true;

@@ -29,7 +29,7 @@ public class WallSlideState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
-		if (e.controlC.control.a)
+		if (e.controlC.control.jump)
 		{
 			if (e.playerC.facingLeft)
 			{

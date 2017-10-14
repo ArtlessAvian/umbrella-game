@@ -56,7 +56,7 @@ public class JumpState extends State<Player>
 			doJump = false;
 		}
 
-		if (!e.controlC.control.a)
+		if (!e.controlC.control.jump)
 		{
 			e.physicsC.gravityAcc = 600;
 		}

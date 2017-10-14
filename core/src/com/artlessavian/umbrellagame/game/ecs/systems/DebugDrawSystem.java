@@ -4,6 +4,7 @@ import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.StateComponent;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -23,6 +24,7 @@ public class DebugDrawSystem extends EntitySystem
 	@Override
 	public void update(float deltaTime)
 	{
+		font.draw(batch, Gdx.graphics.getFramesPerSecond() + "", 0, 60);
 		font.draw(batch, p.getComponent(StateComponent.class).state.getClass().getSimpleName(), 0, 48);
 		font.draw(batch, p.getComponent(PhysicsComponent.class).grounded + "", 0, 36);
 		font.draw(batch, p.getComponent(PhysicsComponent.class).pos + "", 0, 24);
