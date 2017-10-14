@@ -2,10 +2,7 @@ package com.artlessavian.umbrellagame.game.ecs.entities;
 
 import com.artlessavian.umbrellagame.game.ControlContainer;
 import com.artlessavian.umbrellagame.game.ecs.components.*;
-import com.artlessavian.umbrellagame.game.playerstates.JumpState;
-import com.artlessavian.umbrellagame.game.playerstates.StandState;
-import com.artlessavian.umbrellagame.game.playerstates.WalkState;
-import com.artlessavian.umbrellagame.game.playerstates.WallSlideState;
+import com.artlessavian.umbrellagame.game.playerstates.*;
 import com.badlogic.ashley.core.Entity;
 
 public class Player extends Entity
@@ -23,7 +20,7 @@ public class Player extends Entity
 		physicsC.pos.x = 48;
 		physicsC.pos.y = 48;
 		physicsC.vel.y = 0;
-		physicsC.vel.x = 0;
+		physicsC.vel.x = 100;
 		physicsC.gravityAcc = 180;
 		physicsC.grounded = false;
 
@@ -39,7 +36,7 @@ public class Player extends Entity
 		spriteC = new SpriteComponent();
 		spriteC.sprite.setSize(16, 32);
 		stateC = new StateComponent();
-		stateC.state = new WalkState(stateC, this);
+		stateC.state = new FloatState(stateC, this);
 
 		this.add(physicsC);
 		this.add(collisionC);

@@ -35,12 +35,13 @@ public class GameScreen implements Screen
 		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new CollisionSystem(map));
 
-		drawSystem = new DrawSystem(main.batch, map);
-		drawSystem.setProcessing(false);
-		engine.addSystem(drawSystem);
-
 		p = new Player(main.control);
 		engine.addEntity(p);
+
+
+		drawSystem = new DrawSystem(main.batch, map, p);
+		drawSystem.setProcessing(false);
+		engine.addSystem(drawSystem);
 
 		guiDrawSystem = new GUIDrawSystem(main.batch, main.font, p);
 		guiDrawSystem.setProcessing(false);

@@ -3,6 +3,7 @@ package com.artlessavian.umbrellagame.game.playerstates;
 import com.artlessavian.umbrellagame.game.State;
 import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
+import com.badlogic.gdx.graphics.Color;
 
 public class WallSlideState extends State<Player>
 {
@@ -10,6 +11,7 @@ public class WallSlideState extends State<Player>
 	{
 		super(sm, player);
 		e.physicsC.vel.y = 0;
+		e.physicsC.gravityAcc = 30;
 	}
 
 	@Override
@@ -37,7 +39,8 @@ public class WallSlideState extends State<Player>
 			{
 				e.physicsC.vel.x = 85;
 			}
-			sm.state = new JumpState(sm, e, true);
+			e.physicsC.vel.y = 180;
+			sm.state = new JumpState(sm, e, false);
 			return true;
 		}
 		return false;
@@ -46,6 +49,6 @@ public class WallSlideState extends State<Player>
 	@Override
 	public void update(float deltaT)
 	{
-
+		e.spriteC.sprite.setColor(Color.RED);
 	}
 }

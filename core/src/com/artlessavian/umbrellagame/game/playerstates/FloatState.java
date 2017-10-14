@@ -5,13 +5,14 @@ import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 import com.badlogic.gdx.graphics.Color;
 
-public class WalkState extends State<Player>
+public class FloatState extends State<Player>
 {
 
-	final float WALK_MAX_SPEED = 90;
-	final float WALK_ACCEL = 9;
-	
-	public WalkState(StateMachine sm, Player player)
+	final float FALL_MAX_SPEED = 30;
+	final float FLOAT_MAX_SPEED = 90;
+	final float FLOAT_ACCEL = 2;
+
+	public FloatState(StateMachine sm, Player player)
 	{
 		super(sm, player);
 	}
@@ -31,14 +32,9 @@ public class WalkState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
-		if (e.controlC.control.a)
+		if (e.controlC.control.down)
 		{
-			sm.state = new JumpState(sm, e, true);
-			return true;
-		}
-		if (e.controlC.control.right == e.controlC.control.left)
-		{
-			e.stateC.state = new StandState(sm, e);
+			e.stateC.state = new FastFallState(sm, e);
 			return true;
 		}
 		return false;
@@ -47,13 +43,18 @@ public class WalkState extends State<Player>
 	@Override
 	public void update(float deltaT)
 	{
-		e.spriteC.sprite.setColor(Color.CHARTREUSE);
+		e.spriteC.sprite.setColor(Color.PURPLE);
+
+		if (e.physicsC.vel.y < -FALL_MAX_SPEED)
+		{
+			e.physicsC.vel.y = -FALL_MAX_SPEED;
+		}
 
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
-			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, WALK_ACCEL);
+			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, FLOAT_ACCEL);
 			e.playerC.facingLeft = !e.controlC.control.right;
-			CommonFuncs.limitSpeedX(e.physicsC, WALK_MAX_SPEED);
+			CommonFuncs.limitSpeedX(e.physicsC, FLOAT_MAX_SPEED);
 		}
 	}
 }

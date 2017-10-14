@@ -4,6 +4,7 @@ import com.artlessavian.umbrellagame.game.Map;
 import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
+import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
@@ -11,29 +12,37 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 
 public class DrawSystem extends IteratingSystem
 {
 	private SpriteBatch batch;
 	private Map map;
+	private Player p;
 	private OrthographicCamera camera;
 
 	private Sprite tileFlyweight;
 
-	public DrawSystem(SpriteBatch batch, Map map)
+	public DrawSystem(SpriteBatch batch, Map map, Player p)
 	{
 		super(Family.all(SpriteComponent.class).get());
 		this.batch = batch;
 		this.map = map;
+		this.p = p;
 		this.camera = new OrthographicCamera(400, 225);
 //		this.camera.zoom = 5f;
 
 		tileFlyweight = new Sprite();
 	}
 
+	Vector3 targetCamera = new Vector3();
+
 	@Override
 	public void update(float deltaTime)
 	{
+		camera.position.x = (camera.position.x * 49 + p.physicsC.vel.x + p.physicsC.pos.x) / 50;
+		camera.position.y = p.physicsC.pos.y;
+
 		this.camera.update();
 		batch.setProjectionMatrix(this.camera.combined);
 

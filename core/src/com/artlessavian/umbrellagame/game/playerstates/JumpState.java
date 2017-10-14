@@ -3,11 +3,12 @@ package com.artlessavian.umbrellagame.game.playerstates;
 import com.artlessavian.umbrellagame.game.State;
 import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
+import com.badlogic.gdx.graphics.Color;
 
 public class JumpState extends State<Player>
 {
 	final float MAX_AIR_SPEED = 80;
-	final float AIR_ACCEL = 9;
+	final float AIR_ACCEL = 4;
 
 	private boolean doJump;
 	
@@ -16,7 +17,7 @@ public class JumpState extends State<Player>
 		super(sm, player);
 		this.doJump = doJump;
 		e.physicsC.grounded = false;
-		e.physicsC.gravityAcc = 180;
+		e.physicsC.gravityAcc = 300;
 	}
 
 	@Override
@@ -34,39 +35,42 @@ public class JumpState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
+		if (e.physicsC.vel.y < 0)
+		{
+			e.stateC.state = new FloatState(sm, e);
+			return true;
+		}
+
+
 		return false;
 	}
 
 	@Override
 	public void update(float deltaT)
 	{
+		e.spriteC.sprite.setColor(Color.BLUE);
+
 		if (doJump)
 		{
-			e.physicsC.vel.y = 150;
+			e.physicsC.vel.y = 200;
 			doJump = false;
 		}
 
-		if (!e.controlC.control.a || e.physicsC.vel.y <= 0)
+		if (!e.controlC.control.a)
 		{
-			// goto float
+			e.physicsC.gravityAcc = 400;
 		}
 
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
-			if (e.controlC.control.right)
-			{
-				e.physicsC.vel.x += AIR_ACCEL;
-			}
-			else
-			{
-				e.physicsC.vel.x -= AIR_ACCEL;
-			}
-			if (e.physicsC.vel.x > MAX_AIR_SPEED) {e.physicsC.vel.x = MAX_AIR_SPEED;}
-			if (e.physicsC.vel.x < -MAX_AIR_SPEED) {e.physicsC.vel.x = -MAX_AIR_SPEED;}
+
+			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, AIR_ACCEL);
+			e.playerC.facingLeft = !e.controlC.control.right;
+			CommonFuncs.limitSpeedX(e.physicsC, MAX_AIR_SPEED);
 		}
 		else
 		{
-			e.physicsC.vel.x -= Math.signum(e.physicsC.vel.x) * 0.8;
+			CommonFuncs.deccelX(e.physicsC, 2f);
 		}
 	}
 }

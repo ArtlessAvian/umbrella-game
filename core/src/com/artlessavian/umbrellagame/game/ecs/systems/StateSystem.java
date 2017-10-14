@@ -18,7 +18,7 @@ public class StateSystem extends IteratingSystem
 		StateComponent stateC = entity.getComponent(StateComponent.class);
 
 		boolean changed = true;
-		while (changed)
+		for (int i = 0; i < 3 && changed; i++)
 		{
 			changed = stateC.state.checkTransition();
 		}

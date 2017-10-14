@@ -19,11 +19,20 @@ public class CollisionComponent implements Component
 		r.setCenter(center);
 	}
 
-	public void getFeet(Vector2 v, Vector2 center)
+	public void getFeetLeft(Vector2 v, Vector2 center)
 	{
 		v.set(center);
 		v.y -= feet;
+		v.x -= width/4f;
 	}
+
+	public void getFeetRight(Vector2 v, Vector2 center)
+	{
+		v.set(center);
+		v.y -= feet;
+		v.x += width/4f;
+	}
+
 
 	public static interface CollisionBehavior
 	{

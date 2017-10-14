@@ -22,6 +22,7 @@ public class CollisionSystem extends IteratingSystem
 	}
 
 	Vector2 temp = new Vector2();
+	Vector2 temp2 = new Vector2();
 	Rectangle rect = new Rectangle();
 
 	@Override
@@ -41,25 +42,40 @@ public class CollisionSystem extends IteratingSystem
 			checkRight(collisionC, physicsC);
 		}
 
-		collisionC.getFeet(temp, physicsC.pos);
 		if (!physicsC.grounded)
 		{
 			if (physicsC.vel.y <= 0)
-			if (map.get((int)(temp.x / 16), (int)(temp.y / 16)).solid)
 			{
-				physicsC.vel.y = 0;
-				physicsC.pos.y = (int)(temp.y / 16f + 1) * 16 + collisionC.feet;
-				System.out.println(physicsC.pos.y);
-				physicsC.grounded = true;
-				collisionC.collisionBehavior.onFloor();
+				collisionC.getFeetLeft(temp, physicsC.pos);
+				collisionC.getFeetRight(temp2, physicsC.pos);
+				if (map.get((int)(temp.x / 16), (int)(temp.y / 16)).solid)
+				{
+					physicsC.vel.y = 0;
+					physicsC.pos.y = (int)(temp.y / 16f + 1) * 16 + collisionC.feet;
+					physicsC.grounded = true;
+					collisionC.collisionBehavior.onFloor();
+				}
+				else if (map.get((int)(temp2.x / 16), (int)(temp2.y / 16)).solid)
+				{
+					physicsC.vel.y = 0;
+					physicsC.pos.y = (int)(temp2.y / 16f + 1) * 16 + collisionC.feet;
+					physicsC.grounded = true;
+					collisionC.collisionBehavior.onFloor();
+				}
 			}
 		}
 		else
 		{
+			collisionC.getFeetLeft(temp, physicsC.pos);
+			collisionC.getFeetRight(temp2, physicsC.pos);
 			if (!map.get((int)(temp.x / 16), (int)(temp.y / 16 - 0.0001)).solid)
 			{
-				physicsC.grounded = false;
-				collisionC.collisionBehavior.onFallOff();
+				if (!map.get((int)(temp2.x / 16), (int)(temp2.y / 16 - 0.0001)).solid)
+				{
+
+					physicsC.grounded = false;
+					collisionC.collisionBehavior.onFallOff();
+				}
 			}
 		}
 	}

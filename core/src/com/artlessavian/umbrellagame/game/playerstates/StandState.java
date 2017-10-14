@@ -3,6 +3,7 @@ package com.artlessavian.umbrellagame.game.playerstates;
 import com.artlessavian.umbrellagame.game.State;
 import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
+import com.badlogic.gdx.graphics.Color;
 
 public class StandState extends State<Player>
 {
@@ -42,7 +43,10 @@ public class StandState extends State<Player>
 	@Override
 	public void update(float deltaT)
 	{
-		e.physicsC.vel.x -= Math.signum(e.physicsC.vel.x) * 0.3;
+		e.spriteC.sprite.setColor(Color.GREEN);
+
+		CommonFuncs.deccelX(e.physicsC, 0.3f);
+
 		e.physicsC.vel.y = 0;
 	}
 }
