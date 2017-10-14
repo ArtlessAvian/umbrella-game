@@ -11,7 +11,7 @@ public class ASwingState extends State<Player>
 	{
 		super(sm, player);
 		e.spriteC.fromSheet(2, 3, 4, 4);
-		e.physicsC.gravityAcc = 1000;
+		e.physicsC.gravityAcc = 600;
 	}
 
 	@Override
