@@ -1,5 +1,6 @@
 package com.artlessavian.umbrellagame.game.ecs.systems;
 
+import com.artlessavian.umbrellagame.game.Map;
 import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
@@ -14,17 +15,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class DrawSystem extends IteratingSystem
 {
 	private SpriteBatch batch;
+	private Map map;
 	private OrthographicCamera camera;
-	private Tile[][] tilemap;
 
 	private Sprite tileFlyweight;
 
-	public DrawSystem(SpriteBatch batch, Tile[][] tilemap)
+	public DrawSystem(SpriteBatch batch, Map map)
 	{
 		super(Family.all(SpriteComponent.class).get());
 		this.batch = batch;
+		this.map = map;
 		this.camera = new OrthographicCamera(400, 225);
-		this.tilemap = tilemap;
+//		this.camera.zoom = 5f;
 
 		tileFlyweight = new Sprite();
 	}
@@ -37,14 +39,19 @@ public class DrawSystem extends IteratingSystem
 
 		batch.begin();
 
-		for (int row = 0; row < tilemap.length; row++)
+		for (int col = 0; col < map.getWidth(); col++)
 		{
-			for (int col = 0; col < tilemap[0].length; col++)
+			for (int row = 0; row < map.getHeight(); row++)
 			{
-//				tileFlyweight.setTexture(Tile.SOMETHING.getTex());
-//				tileFlyweight.setSize(16, 16);
-//				tileFlyweight.setPosition(row * 16, col * 16);
-//				tileFlyweight.draw(batch);
+				if (map.get(col, row) == Tile.AIR)
+				{
+					continue;
+				}
+
+				tileFlyweight.setTexture(map.get(col, row).getTex());
+				tileFlyweight.setSize(16, 16);
+				tileFlyweight.setPosition(col * 16, row * 16);
+				tileFlyweight.draw(batch);
 			}
 		}
 

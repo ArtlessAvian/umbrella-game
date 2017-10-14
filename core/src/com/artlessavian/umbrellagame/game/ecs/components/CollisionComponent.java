@@ -6,9 +6,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class CollisionComponent implements Component
 {
-	float sideHeight; // height
-	float width;
-	float feet; // down from center
+	public float sideHeight; // height
+	public float width;
+	public float feet; // down from center
 
 	public void getLeft(Rectangle r, Vector2 center)
 	{

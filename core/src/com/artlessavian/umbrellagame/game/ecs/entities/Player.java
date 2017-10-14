@@ -15,14 +15,20 @@ public class Player extends Entity
 	public Player()
 	{
 		physicsC = new PhysicsComponent();
-		physicsC.vel.y = 30;
-		physicsC.vel.x = 30;
-		physicsC.gravityAcc = 30;
+		physicsC.pos.x = 48;
+		physicsC.pos.y = 48;
+		physicsC.vel.y = 0;
+		physicsC.vel.x = 0;
+		physicsC.gravityAcc = 6;
 		collisionC = new CollisionComponent();
+		collisionC.feet = 16;
+		collisionC.width = 16;
+		collisionC.sideHeight = 30;
+
 		controlC = new ControlComponent();
 		playerC = new PlayerComponent();
 		spriteC = new SpriteComponent();
-		spriteC.sprite.setSize(16, 16);
+		spriteC.sprite.setSize(16, 32);
 		stateC = new StateComponent();
 
 		this.add(physicsC);

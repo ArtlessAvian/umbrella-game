@@ -4,14 +4,15 @@ import com.badlogic.gdx.graphics.Texture;
 
 public enum Tile
 {
-	SOMETHING(true, "grid.png");
+	AIR(false, "grid.png"),
+	SOMETHING(true, "badlogic.jpg");
 
 	static float lmao = 0;
 	float checkValid = -1;
 
 	private Texture tex;
 	String imagePath;
-	boolean solid;
+	public boolean solid;
 
 	Tile(boolean solid, String imagePath)
 	{

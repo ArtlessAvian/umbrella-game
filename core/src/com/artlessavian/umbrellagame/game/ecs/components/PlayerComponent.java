@@ -7,4 +7,6 @@ public class PlayerComponent implements Component
 	// something player related
 	// health?
 	// dunno
+
+	public boolean facingLeft;
 }
