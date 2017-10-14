@@ -6,5 +6,5 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class SpriteComponent implements Component
 {
-	public Sprite sprite = new Sprite(new Texture("Grid.png"));
+	public Sprite sprite = new Sprite(new Texture("grid.png"));
 }

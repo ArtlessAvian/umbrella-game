@@ -19,13 +19,22 @@ public class DrawSystem extends IteratingSystem
 	}
 
 	@Override
+	public void update(float deltaTime)
+	{
+		batch.begin();
+		super.update(deltaTime);
+		batch.end();
+	}
+
+	@Override
 	protected void processEntity(Entity entity, float deltaTime)
 	{
 		SpriteComponent spriteC = entity.getComponent(SpriteComponent.class);
 		PhysicsComponent physicsC = entity.getComponent(PhysicsComponent.class);
+
 		if (physicsC != null)
 		{
-			spriteC.sprite.setPosition(physicsC.pos.x, physicsC.pos.y);
+			spriteC.sprite.setCenter(physicsC.pos.x, physicsC.pos.y);
 		}
 
 		spriteC.sprite.draw(batch);

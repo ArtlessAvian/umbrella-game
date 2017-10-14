@@ -15,13 +15,20 @@ public class Player extends Entity
 	public Player()
 	{
 		physicsC = new PhysicsComponent();
-		physicsC.vel.y = 3;
-		physicsC.vel.x = 3;
+		physicsC.vel.y = 30;
+		physicsC.vel.x = 30;
 		physicsC.gravityAcc = 3;
 		collisionC = new CollisionComponent();
 		controlC = new ControlComponent();
 		playerC = new PlayerComponent();
 		spriteC = new SpriteComponent();
 		stateC = new StateComponent();
+
+		this.add(physicsC);
+		this.add(collisionC);
+		this.add(controlC);
+		this.add(playerC);
+		this.add(spriteC);
+		this.add(stateC);
 	}
 }
