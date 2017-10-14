@@ -7,6 +7,9 @@ import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.PlayerComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IteratingSystem;
 //import com.artlessavian.umbrellagame.game.ecs.entities.RainParticle;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
@@ -26,7 +29,6 @@ public class DrawSystem extends IteratingSystem
 
 	private Texture cloun;
 	private Texture rain;
-
 	private Sprite tileFlyweight;
 
 	public DrawSystem(SpriteBatch batch, AutoMap map, Player p)
@@ -48,8 +50,6 @@ public class DrawSystem extends IteratingSystem
 	@Override
 	public void update(float deltaTime)
 	{
-//		this.getEngine().addEntity(new RainParticle(p.physicsC.pos, 0, this.getEngine()));
-
 		camera.position.x = (camera.position.x * 49 + p.physicsC.vel.x + p.physicsC.pos.x) / 50;
 		camera.position.y = p.physicsC.pos.y;
 

@@ -38,6 +38,7 @@ public class StandState extends State<Player>
 			sm.state = new JumpState(sm, e, true);
 			return true;
 		}
+
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
 			sm.state = new WalkState(sm, e);

@@ -73,6 +73,7 @@ public class WallSlideState extends State<Player>
 	{
 		validSlide += deltaT;
 
+		e.spriteC.fromSheet(3, 1, 4, 4);
 
 		if (e.controlC.control.down)
 		{
@@ -87,7 +88,6 @@ public class WallSlideState extends State<Player>
 		{
 			e.physicsC.vel.x = -1;
 		}
-
 		CommonFuncs.editWet(e.playerC, -0.2f, deltaT);
 	}
 }

@@ -29,6 +29,7 @@ public class GameScreen implements Screen
 		this.main = main;
 		this.engine = new Engine();
 
+
 //		map = new Map("levels/1.txt");
 		map = new AutoMap();
 
