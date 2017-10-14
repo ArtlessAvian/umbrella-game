@@ -33,6 +33,12 @@ public class CollisionComponent implements Component
 		v.x += width/4f;
 	}
 
+	public void getHead(Vector2 v, Vector2 center)
+	{
+		v.set(center);
+		v.y += feet;
+	}
+
 
 	public static interface CollisionBehavior
 	{
@@ -40,5 +46,6 @@ public class CollisionComponent implements Component
 		void onLeft();
 		void onRight();
 		void onFallOff();
+		void onPineapple();
 	}
 }

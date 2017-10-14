@@ -27,7 +27,7 @@ public class Player extends Entity
 		collisionC = new CollisionComponent();
 		collisionC.feet = 16;
 		collisionC.width = 16;
-		collisionC.sideHeight = 20;
+		collisionC.sideHeight = 16;
 		collisionC.collisionBehavior = new PlayerCollisionBehavior();
 
 		controlC = new ControlComponent(cc);
@@ -86,6 +86,12 @@ public class Player extends Entity
 		public void onFallOff()
 		{
 			stateC.state = new JumpState(stateC.state.sm, (Player)stateC.state.e, false);
+		}
+
+		@Override
+		public void onPineapple()
+		{
+
 		}
 	}
 }

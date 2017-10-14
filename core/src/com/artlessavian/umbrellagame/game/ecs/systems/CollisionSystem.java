@@ -33,6 +33,15 @@ public class CollisionSystem extends IteratingSystem
 
 		PlayerComponent playerC = entity.getComponent(PlayerComponent.class);
 
+		collisionC.getHead(temp, physicsC.pos);
+		if (map.get((int)(temp.x / 16), (int)(temp.y / 16)).solid)
+		{
+			physicsC.vel.y = 0;
+			physicsC.pos.y = (int)(temp.y / 16f) * 16 - collisionC.feet;
+			physicsC.grounded = false;
+			collisionC.collisionBehavior.onPineapple();
+		}
+
 		if (physicsC.vel.x < 0)
 		{
 			checkLeft(collisionC, physicsC);
@@ -85,7 +94,7 @@ public class CollisionSystem extends IteratingSystem
 		collisionC.getBody(rect, physicsC.pos);
 		for (int x = (int)(rect.x / 16); x < Math.ceil((rect.x + rect.width)/16); x++)
 		{
-			for (int y = (int)Math.floor(rect.y / 16); y <= Math.ceil((rect.y + rect.height)/16); y++)
+			for (int y = (int)Math.floor(rect.y / 16); y < Math.ceil((rect.y + rect.height)/16); y++)
 			{
 				if (map.get(x,y).solid)
 				{
@@ -103,7 +112,7 @@ public class CollisionSystem extends IteratingSystem
 		collisionC.getBody(rect, physicsC.pos);
 		for (int x = (int)(rect.x / 16); x < Math.ceil((rect.x + rect.width)/16); x++)
 		{
-			for (int y = (int)(rect.y / 16); y <= Math.ceil((rect.y + rect.height)/16); y++)
+			for (int y = (int)(rect.y / 16); y < Math.ceil((rect.y + rect.height)/16); y++)
 			{
 				if (map.get(x,y).solid)
 				{
