@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Color;
 
 public class JumpState extends State<Player>
 {
-	final float MAX_AIR_SPEED = 80;
-	final float AIR_ACCEL = 4;
+	final static float MAX_AIR_SPEED = 80;
+	final static float AIR_ACCEL = 4;
 
 	private boolean doJump;
 	
@@ -58,7 +58,7 @@ public class JumpState extends State<Player>
 
 		if (!e.controlC.control.jump)
 		{
-			e.physicsC.gravityAcc = 600;
+			e.physicsC.gravityAcc = 1000;
 		}
 
 		if (e.controlC.control.right != e.controlC.control.left)

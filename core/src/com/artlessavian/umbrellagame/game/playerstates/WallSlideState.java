@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Color;
 
 public class WallSlideState extends State<Player>
 {
+	public float validSlide;
+
 	public WallSlideState(StateMachine sm, Player player)
 	{
 		super(sm, player);
@@ -29,6 +31,13 @@ public class WallSlideState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
+		System.out.println(validSlide);
+		if (validSlide > 0.03f)
+		{
+			sm.state = new JumpState(sm, e, false);
+			return true;
+		}
+
 		if (e.controlC.control.jump)
 		{
 			if (e.playerC.facingLeft)
@@ -59,11 +68,22 @@ public class WallSlideState extends State<Player>
 	@Override
 	public void update(float deltaT)
 	{
+		validSlide += deltaT;
+
 		e.spriteC.sprite.setColor(Color.RED);
 
 		if (e.controlC.control.down)
 		{
 			e.physicsC.vel.y -= 2;
+		}
+
+		if (e.playerC.facingLeft)
+		{
+			e.physicsC.vel.x = 1;
+		}
+		else
+		{
+			e.physicsC.vel.x = -1;
 		}
 
 		CommonFuncs.editWet(e.playerC, -0.2f, deltaT);

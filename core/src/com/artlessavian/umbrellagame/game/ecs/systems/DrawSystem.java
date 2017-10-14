@@ -5,10 +5,11 @@ import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
-import com.artlessavian.umbrellagame.game.ecs.entities.RainParticle;
+//import com.artlessavian.umbrellagame.game.ecs.entities.RainParticle;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -23,6 +24,7 @@ public class DrawSystem extends IteratingSystem
 	private OrthographicCamera camera;
 
 	private Texture cloun;
+	private Texture rain;
 
 	private Sprite tileFlyweight;
 
@@ -36,6 +38,7 @@ public class DrawSystem extends IteratingSystem
 		this.camera.position.set(map.getStart(), 0);
 //		this.camera.zoom = 5f;
 
+		rain = new Texture("rain.png");
 		cloun = new Texture("cloun.png");
 
 		tileFlyweight = new Sprite();
@@ -44,7 +47,6 @@ public class DrawSystem extends IteratingSystem
 	@Override
 	public void update(float deltaTime)
 	{
-//		for (int i = 0; i < 10; i++)
 //		this.getEngine().addEntity(new RainParticle(p.physicsC.pos, 0, this.getEngine()));
 
 		camera.position.x = (camera.position.x * 49 + p.physicsC.vel.x + p.physicsC.pos.x) / 50;
@@ -56,6 +58,12 @@ public class DrawSystem extends IteratingSystem
 		{
 			batch.draw(cloun, -(camera.position.x / 3 % 300) + i * 300 - 100, 450 - 150);
 		}
+
+		for (int i = 0; i < 100; i++)
+		{
+			batch.draw(rain, (float)(Math.sin(i + Gdx.graphics.getFrameId()) * 400 + 400), i * 450/100f);
+		}
+
 		for (int i = 0; i < 4; i++)
 		{
 			batch.draw(cloun, -(camera.position.x / 2 % 300) + i * 300 - 100, 450 - 100);
