@@ -5,12 +5,12 @@ import com.badlogic.ashley.core.Entity;
 
 public class Player extends Entity
 {
-	PhysicsComponent physicsC;
-	CollisionComponent collisionC;
-	ControlComponent controlC;
-	PlayerComponent playerC;
-	SpriteComponent spriteC;
-	StateComponent stateC;
+	public PhysicsComponent physicsC;
+	public CollisionComponent collisionC;
+	public ControlComponent controlC;
+	public PlayerComponent playerC;
+	public SpriteComponent spriteC;
+	public StateComponent stateC;
 
 	public Player()
 	{
