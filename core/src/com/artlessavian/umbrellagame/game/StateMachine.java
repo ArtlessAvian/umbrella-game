@@ -5,5 +5,5 @@ package com.artlessavian.umbrellagame.game;
  */
 public class StateMachine
 {
-	State state;
+	public State state;
 }

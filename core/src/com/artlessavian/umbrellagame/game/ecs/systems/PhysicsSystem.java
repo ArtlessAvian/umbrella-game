@@ -23,7 +23,11 @@ public class PhysicsSystem extends IteratingSystem
 		PhysicsComponent physicsC = entity.getComponent(PhysicsComponent.class);
 
 		physicsC.pos.x += physicsC.vel.x * deltaTime;
-		physicsC.pos.y += physicsC.vel.y * deltaTime;
-		physicsC.pos.y += 1/2f * physicsC.gravityAcc * deltaTime * deltaTime;
+		if (!physicsC.grounded)
+		{
+			physicsC.pos.y += physicsC.vel.y * deltaTime;
+			physicsC.pos.y -= 1 / 2f * physicsC.gravityAcc * deltaTime * deltaTime;
+			physicsC.vel.y -= physicsC.gravityAcc * deltaTime;
+		}
 	}
 }

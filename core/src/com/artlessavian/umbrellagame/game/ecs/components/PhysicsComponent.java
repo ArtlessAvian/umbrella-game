@@ -18,5 +18,5 @@ public class PhysicsComponent implements Component
 	// is true if on ground.
 	public boolean grounded;
 
-	public float gravityAcc = 3; // insert magic number here
+	public float gravityAcc = 30; // insert magic number here
 }
