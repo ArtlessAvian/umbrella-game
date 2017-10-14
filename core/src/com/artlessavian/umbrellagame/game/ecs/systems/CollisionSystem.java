@@ -49,9 +49,11 @@ public class CollisionSystem extends IteratingSystem
 		if (physicsC.vel.x < 0)
 		{
 			checkLeft(collisionC, physicsC);
+			checkRight(collisionC, physicsC);
 		}
 		else if (physicsC.vel.x > 0)
 		{
+			checkLeft(collisionC, physicsC);
 			checkRight(collisionC, physicsC);
 		}
 
@@ -95,7 +97,7 @@ public class CollisionSystem extends IteratingSystem
 
 	private void checkLeft(CollisionComponent collisionC, PhysicsComponent physicsC)
 	{
-		collisionC.getBody(rect, physicsC.pos);
+		collisionC.getBodyLeft(rect, physicsC.pos);
 		for (int x = (int)(rect.x / 16); x < Math.ceil((rect.x + rect.width)/16); x++)
 		{
 			for (int y = (int)Math.floor(rect.y / 16); y < Math.ceil((rect.y + rect.height)/16); y++)
@@ -113,7 +115,7 @@ public class CollisionSystem extends IteratingSystem
 
 	private void checkRight(CollisionComponent collisionC, PhysicsComponent physicsC)
 	{
-		collisionC.getBody(rect, physicsC.pos);
+		collisionC.getBodyRight(rect, physicsC.pos);
 		for (int x = (int)(rect.x / 16); x < Math.ceil((rect.x + rect.width)/16); x++)
 		{
 			for (int y = (int)(rect.y / 16); y < Math.ceil((rect.y + rect.height)/16); y++)

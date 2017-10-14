@@ -10,6 +10,7 @@ public class StandState extends State<Player>
 	public StandState(StateMachine sm, Player player)
 	{
 		super(sm, player);
+		e.spriteC.fromSheet(2, 0, 4, 4);
 	}
 
 	@Override
@@ -27,6 +28,7 @@ public class StandState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
+
 		if (e.controlC.control.jump)
 		{
 			sm.state = new JumpState(sm, e, true);
@@ -40,10 +42,16 @@ public class StandState extends State<Player>
 		return false;
 	}
 
+	float timeInState = 0;
+
 	@Override
 	public void update(float deltaT)
 	{
-		e.spriteC.sprite.setColor(Color.GREEN);
+		timeInState += deltaT;
+		if (timeInState > 0.5f)
+		{
+			e.spriteC.fromSheet(0, 0, 4, 4);
+		}
 
 		CommonFuncs.deccelX(e.physicsC, 0.3f);
 

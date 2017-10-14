@@ -1,8 +1,10 @@
 package com.artlessavian.umbrellagame.game.ecs.systems;
 
+import com.artlessavian.umbrellagame.Maineroni;
 import com.artlessavian.umbrellagame.game.MapInterface;
 import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
+import com.artlessavian.umbrellagame.game.ecs.components.PlayerComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 //import com.artlessavian.umbrellagame.game.ecs.entities.RainParticle;
@@ -14,7 +16,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 
 public class DrawSystem extends IteratingSystem
 {
@@ -53,7 +54,7 @@ public class DrawSystem extends IteratingSystem
 		camera.position.y = p.physicsC.pos.y;
 
 
-		batch.setProjectionMatrix(GUIDrawSystem.screenSpace.combined);
+		batch.setProjectionMatrix(Maineroni.screenSpace.combined);
 		for (int i = 0; i < 6; i++)
 		{
 			batch.draw(cloun, -(camera.position.x / 3 % 300) + i * 300 - 100, 450 - 150);
@@ -97,10 +98,15 @@ public class DrawSystem extends IteratingSystem
 	{
 		SpriteComponent spriteC = entity.getComponent(SpriteComponent.class);
 		PhysicsComponent physicsC = entity.getComponent(PhysicsComponent.class);
+		PlayerComponent playerC = entity.getComponent(PlayerComponent.class);
 
 		if (physicsC != null)
 		{
 			spriteC.sprite.setCenter(physicsC.pos.x, physicsC.pos.y);
+		}
+		if (playerC != null)
+		{
+			spriteC.sprite.setFlip(playerC.facingLeft, false);
 		}
 
 		spriteC.sprite.draw(batch);

@@ -6,5 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class SpriteComponent implements Component
 {
-	public Sprite sprite = new Sprite();
+	public Sprite sprite;
+
+	public void fromSheet(float x, float y, int xMax, int yMax)
+	{
+		sprite.setU(x/xMax);
+		sprite.setU2((x+1)/xMax);
+		sprite.setV(y/yMax);
+		sprite.setV2((y+1)/yMax);
+	}
 }

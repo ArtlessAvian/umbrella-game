@@ -12,11 +12,20 @@ public class CollisionComponent implements Component
 
 	public CollisionBehavior collisionBehavior;
 
-	public void getBody(Rectangle r, Vector2 center)
+	public void getBodyLeft(Rectangle r, Vector2 center)
 	{
 		r.setHeight(sideHeight);
-		r.setWidth(width);
+		r.setWidth(width/2f);
 		r.setCenter(center);
+		r.x -= width/4f;
+	}
+
+	public void getBodyRight(Rectangle r, Vector2 center)
+	{
+		r.setHeight(sideHeight);
+		r.setWidth(width/2f);
+		r.setCenter(center);
+		r.x += width/4f;
 	}
 
 	public void getFeetLeft(Vector2 v, Vector2 center)

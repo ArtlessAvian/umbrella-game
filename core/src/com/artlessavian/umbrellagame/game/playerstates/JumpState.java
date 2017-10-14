@@ -18,6 +18,8 @@ public class JumpState extends State<Player>
 		this.doJump = doJump;
 		e.physicsC.grounded = false;
 		e.physicsC.gravityAcc = 300;
+
+		e.spriteC.fromSheet(1, 0, 4, 4);
 	}
 
 	@Override
@@ -48,8 +50,6 @@ public class JumpState extends State<Player>
 	@Override
 	public void update(float deltaT)
 	{
-		e.spriteC.sprite.setColor(Color.BLUE);
-
 		if (doJump)
 		{
 			e.physicsC.vel.y = 200;
