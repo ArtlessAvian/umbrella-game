@@ -48,5 +48,7 @@ public class StandState extends State<Player>
 		CommonFuncs.deccelX(e.physicsC, 0.3f);
 
 		e.physicsC.vel.y = 0;
+
+		CommonFuncs.editWet(e.playerC, 0.02f, deltaT);
 	}
 }

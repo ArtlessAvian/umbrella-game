@@ -32,5 +32,7 @@ public class FastFallState extends State<Player>
 		e.spriteC.sprite.setColor(Color.GRAY);
 
 		if (e.physicsC.vel.x < -300) {e.physicsC.vel.x = -300;}
+
+		CommonFuncs.editWet(e.playerC, -0.3f, deltaT);
 	}
 }

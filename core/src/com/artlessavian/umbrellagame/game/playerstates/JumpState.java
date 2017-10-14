@@ -72,5 +72,7 @@ public class JumpState extends State<Player>
 		{
 			CommonFuncs.deccelX(e.physicsC, 2f);
 		}
+
+		CommonFuncs.editWet(e.playerC, 0.02f, deltaT);
 	}
 }

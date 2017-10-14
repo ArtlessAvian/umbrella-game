@@ -50,5 +50,6 @@ public class WallSlideState extends State<Player>
 	public void update(float deltaT)
 	{
 		e.spriteC.sprite.setColor(Color.RED);
+		CommonFuncs.editWet(e.playerC, -0.2f, deltaT);
 	}
 }

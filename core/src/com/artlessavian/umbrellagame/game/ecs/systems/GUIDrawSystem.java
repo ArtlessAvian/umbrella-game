@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.LinkedList;
+
 public class GUIDrawSystem extends EntitySystem
 {
 	private final SpriteBatch batch;
@@ -29,6 +31,6 @@ public class GUIDrawSystem extends EntitySystem
 	public void update(float deltaTime)
 	{
 		batch.setProjectionMatrix(screenSpace.combined);
-		font.draw(batch, "Wetness: ", 50, 400);
+		font.draw(batch, "Wetness: " + Math.ceil(p.playerC.wetness * 1000)/10 + "%", 50, 400);
 	}
 }

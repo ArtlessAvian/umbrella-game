@@ -1,6 +1,7 @@
 package com.artlessavian.umbrellagame.game.playerstates;
 
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
+import com.artlessavian.umbrellagame.game.ecs.components.PlayerComponent;
 
 public class CommonFuncs
 {
@@ -29,6 +30,18 @@ public class CommonFuncs
 		else
 		{
 			physicsC.vel.x -= Math.signum(physicsC.vel.x) * deccel;
+		}
+	}
+	public static void editWet(PlayerComponent playerC, float scaling, float time)
+	{
+		playerC.wetness += scaling * time;
+		if (playerC.wetness > 1)
+		{
+			playerC.wetness = 1;
+		}
+		if (playerC.wetness < 0)
+		{
+			playerC.wetness = 0xDEADDEAD;
 		}
 	}
 }

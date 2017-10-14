@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 public class WalkState extends State<Player>
 {
 
-	final float WALK_MAX_SPEED = 90;
+	final float WALK_MAX_SPEED = 120;
 	final float WALK_ACCEL = 9;
 	
 	public WalkState(StateMachine sm, Player player)
@@ -55,5 +55,7 @@ public class WalkState extends State<Player>
 			e.playerC.facingLeft = !e.controlC.control.right;
 			CommonFuncs.limitSpeedX(e.physicsC, WALK_MAX_SPEED);
 		}
+
+		CommonFuncs.editWet(e.playerC, 0.02f, deltaT);
 	}
 }
