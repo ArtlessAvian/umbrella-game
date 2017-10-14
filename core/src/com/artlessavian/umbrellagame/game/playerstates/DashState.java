@@ -15,6 +15,7 @@ public class DashState extends State<Player>
 		if (e.controlC.control.left)
 		{
 			e.physicsC.vel.x *= -1;
+			
 		}
 	}
 
