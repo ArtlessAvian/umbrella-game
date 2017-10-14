@@ -1,5 +1,7 @@
 package com.artlessavian.umbrellagame.game;
 
+import com.artlessavian.umbrellagame.game.ecs.entities.Player;
+
 /**
  * Does or edits behavior over time
  * @author ArtlessAvian
@@ -7,16 +9,16 @@ package com.artlessavian.umbrellagame.game;
  */
 public abstract class State<E>
 {
-	private final StateMachine sm;
-	private final E e;
+	public final StateMachine sm;
+	public final E e;
 
-	State(StateMachine sm, E e)
+	public State(StateMachine sm, E e)
 	{
 		this.sm = sm;
 		this.e = e;
 	}
 
-	abstract void enter();
-	abstract void exit();
-	abstract void update(float deltaT);
+	public abstract void enter();
+	public abstract void exit();
+	public abstract void update(float deltaT);
 }
