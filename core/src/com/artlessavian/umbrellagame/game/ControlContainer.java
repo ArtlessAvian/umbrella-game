@@ -6,16 +6,16 @@ package com.artlessavian.umbrellagame.game;
  */
 public class ControlContainer
 {
-	boolean up;
-	boolean down;
-	boolean left;
-	boolean right;
+	public boolean up;
+	public boolean down;
+	public boolean left;
+	public boolean right;
 
-	boolean a;
-	boolean b;
-	boolean x;
-	boolean y;
+	public boolean a;
+	public boolean b;
+	public boolean x;
+	public boolean y;
 
-	boolean start;
-	boolean select;
+	public boolean start;
+	public boolean select;
 }
