@@ -8,7 +8,7 @@ import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 public class DashState extends State<Player>
 {
 	public DashState(StateMachine sm, Player player)
-	{
+	{  
 		super(sm, player);
 
 		e.physicsC.vel.x = 200;
