@@ -4,6 +4,7 @@ import com.artlessavian.umbrellagame.game.ControlContainer;
 import com.artlessavian.umbrellagame.game.ecs.components.*;
 import com.artlessavian.umbrellagame.game.playerstates.*;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity
 {
@@ -14,11 +15,11 @@ public class Player extends Entity
 	public SpriteComponent spriteC;
 	public StateComponent stateC;
 
-	public Player(ControlContainer cc)
+	public Player(ControlContainer cc, Vector2 start)
 	{
 		physicsC = new PhysicsComponent();
-		physicsC.pos.x = 48;
-		physicsC.pos.y = 48;
+		physicsC.pos.set(start);
+		physicsC.pos.scl(16);
 		physicsC.vel.y = 0;
 		physicsC.vel.x = 100;
 		physicsC.gravityAcc = 180;

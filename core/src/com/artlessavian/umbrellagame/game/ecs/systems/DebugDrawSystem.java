@@ -23,9 +23,9 @@ public class DebugDrawSystem extends EntitySystem
 	@Override
 	public void update(float deltaTime)
 	{
-		font.draw(batch, p.getComponent(StateComponent.class).state.getClass().getSimpleName(), 0, 0);
-		font.draw(batch, p.getComponent(PhysicsComponent.class).grounded + "", 0, 0);
-		font.draw(batch, p.getComponent(PhysicsComponent.class).pos + "", -30, 0);
-		font.draw(batch, p.getComponent(PhysicsComponent.class).vel + "", -30, 0);
+		font.draw(batch, p.getComponent(StateComponent.class).state.getClass().getSimpleName(), 0, 48);
+		font.draw(batch, p.getComponent(PhysicsComponent.class).grounded + "", 0, 36);
+		font.draw(batch, p.getComponent(PhysicsComponent.class).pos + "", 0, 24);
+		font.draw(batch, p.getComponent(PhysicsComponent.class).vel + "", 0, 12);
 	}
 }

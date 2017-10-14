@@ -16,7 +16,7 @@ public class GameScreen implements Screen
 	private Maineroni main;
 	private Engine engine;
 
-	private Map map;
+	private MapInterface map;
 
 	DrawSystem drawSystem;
 	GUIDrawSystem guiDrawSystem;
@@ -29,15 +29,15 @@ public class GameScreen implements Screen
 		this.main = main;
 		this.engine = new Engine();
 
-		map = new Map("levels/1.txt");
+//		map = new Map("levels/1.txt");
+		map = new AutoMap();
 
 		engine.addSystem(new StateSystem());
 		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new CollisionSystem(map));
 
-		p = new Player(main.control);
+		p = new Player(main.control, map.getStart());
 		engine.addEntity(p);
-
 
 		drawSystem = new DrawSystem(main.batch, map, p);
 		drawSystem.setProcessing(false);
@@ -59,7 +59,7 @@ public class GameScreen implements Screen
 	}
 
 	private boolean timeStop;
-	float updateRate = 1/60f;
+	float updateRate = 1/180f;
 	float rollover = 0;
 
 	@Override

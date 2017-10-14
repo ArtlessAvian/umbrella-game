@@ -1,5 +1,6 @@
 package com.artlessavian.umbrellagame.game.playerstates;
 
+import com.artlessavian.umbrellagame.game.Map;
 import com.artlessavian.umbrellagame.game.State;
 import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
@@ -51,9 +52,8 @@ public class WalkState extends State<Player>
 
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
-			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, WALK_ACCEL);
+			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, WALK_ACCEL, WALK_MAX_SPEED);
 			e.playerC.facingLeft = !e.controlC.control.right;
-			CommonFuncs.limitSpeedX(e.physicsC, WALK_MAX_SPEED);
 		}
 
 		CommonFuncs.editWet(e.playerC, 0.02f, deltaT);

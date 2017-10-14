@@ -2,13 +2,15 @@ package com.artlessavian.umbrellagame.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.math.Vector2;
 
 import static com.artlessavian.umbrellagame.game.Tile.AIR;
 
-public class Map
+public class Map implements MapInterface
 {
 	private Tile[] tileSet;
 	private int[][] tilemap;
+	private Vector2 startPos;
 
 	public Map(String filePath)
 	{
@@ -25,7 +27,12 @@ public class Map
 			tileSet[i] = Tile.valueOf(tileSetString[i]);
 		}
 
-		String[] size = tokens[1].split(",");
+		Vector2 startPos = new Vector2();
+		String[] start = tokens[1].split(",");
+		startPos.x = Integer.parseInt(start[0]);
+		startPos.y = Integer.parseInt(start[1]);
+
+		String[] size = tokens[2].split(",");
 		int width = Integer.parseInt(size[0]);
 		int height = Integer.parseInt(size[1]);
 
@@ -33,13 +40,19 @@ public class Map
 
 		for (int y = 0; y < height; y++)
 		{
-			String[] row = tokens[y + 2].split(",");
+			String[] row = tokens[y + 3].split(",");
 			for (int x = 0; x < tilemap.length; x++)
 			{
 				this.tilemap[x][height - y - 1] = Integer.parseInt(row[x]);
 			}
 		}
 
+	}
+
+	@Override
+	public Vector2 getStart()
+	{
+		return null;
 	}
 
 	public Tile get(int x, int y)

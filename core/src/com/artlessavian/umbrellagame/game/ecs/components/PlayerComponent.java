@@ -9,5 +9,5 @@ public class PlayerComponent implements Component
 	// dunno
 
 	public boolean facingLeft;
-	public float wetness = 1;
+	public float wetness = 1; // is actually dryness lmao
 }

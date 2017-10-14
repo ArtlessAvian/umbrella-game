@@ -58,15 +58,14 @@ public class JumpState extends State<Player>
 
 		if (!e.controlC.control.a)
 		{
-			e.physicsC.gravityAcc = 400;
+			e.physicsC.gravityAcc = 600;
 		}
 
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
 
-			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, AIR_ACCEL);
+			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, AIR_ACCEL, MAX_AIR_SPEED);
 			e.playerC.facingLeft = !e.controlC.control.right;
-			CommonFuncs.limitSpeedX(e.physicsC, MAX_AIR_SPEED);
 		}
 		else
 		{

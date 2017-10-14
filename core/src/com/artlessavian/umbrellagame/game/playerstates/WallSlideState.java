@@ -43,6 +43,16 @@ public class WallSlideState extends State<Player>
 			sm.state = new JumpState(sm, e, false);
 			return true;
 		}
+		if (e.controlC.control.left && e.playerC.facingLeft)
+		{
+			sm.state = new JumpState(sm, e, false);
+			return true;
+		}
+		if (e.controlC.control.right && !e.playerC.facingLeft)
+		{
+			sm.state = new JumpState(sm, e, false);
+			return true;
+		}
 		return false;
 	}
 
@@ -50,6 +60,12 @@ public class WallSlideState extends State<Player>
 	public void update(float deltaT)
 	{
 		e.spriteC.sprite.setColor(Color.RED);
+
+		if (e.controlC.control.down)
+		{
+			e.physicsC.vel.y -= 2;
+		}
+
 		CommonFuncs.editWet(e.playerC, -0.2f, deltaT);
 	}
 }

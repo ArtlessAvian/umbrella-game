@@ -52,9 +52,10 @@ public class FloatState extends State<Player>
 
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
-			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, FLOAT_ACCEL);
+			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, FLOAT_ACCEL, FLOAT_MAX_SPEED);
 			e.playerC.facingLeft = !e.controlC.control.right;
-			CommonFuncs.limitSpeedX(e.physicsC, FLOAT_MAX_SPEED);
 		}
+
+		CommonFuncs.editWet(e.playerC, 0.05f, deltaT);
 	}
 }

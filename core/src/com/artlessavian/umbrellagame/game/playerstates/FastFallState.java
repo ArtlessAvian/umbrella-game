@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 
 public class FastFallState extends State<Player>
 {
-	final float FAST_FALL_MAX_SPEED = -300;
+	final float FAST_FALL_MAX_SPEED = 300;
 
 	public FastFallState(StateMachine sm, Player e)
 	{
@@ -31,7 +31,7 @@ public class FastFallState extends State<Player>
 	{
 		e.spriteC.sprite.setColor(Color.GRAY);
 
-		if (e.physicsC.vel.x < -300) {e.physicsC.vel.x = -300;}
+		if (e.physicsC.vel.y < -FAST_FALL_MAX_SPEED) {e.physicsC.vel.y = -FAST_FALL_MAX_SPEED;}
 
 		CommonFuncs.editWet(e.playerC, -0.3f, deltaT);
 	}

@@ -1,6 +1,7 @@
 package com.artlessavian.umbrellagame.game.ecs.systems;
 
 import com.artlessavian.umbrellagame.game.Map;
+import com.artlessavian.umbrellagame.game.MapInterface;
 import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
@@ -17,19 +18,20 @@ import com.badlogic.gdx.math.Vector3;
 public class DrawSystem extends IteratingSystem
 {
 	private SpriteBatch batch;
-	private Map map;
+	private MapInterface map;
 	private Player p;
 	private OrthographicCamera camera;
 
 	private Sprite tileFlyweight;
 
-	public DrawSystem(SpriteBatch batch, Map map, Player p)
+	public DrawSystem(SpriteBatch batch, MapInterface map, Player p)
 	{
 		super(Family.all(SpriteComponent.class).get());
 		this.batch = batch;
 		this.map = map;
 		this.p = p;
 		this.camera = new OrthographicCamera(400, 225);
+		this.camera.position.set(map.getStart(), 0);
 //		this.camera.zoom = 5f;
 
 		tileFlyweight = new Sprite();
@@ -46,9 +48,9 @@ public class DrawSystem extends IteratingSystem
 		this.camera.update();
 		batch.setProjectionMatrix(this.camera.combined);
 
-		for (int col = 0; col < map.getWidth(); col++)
+		for (int col = (int)Math.max(0, (camera.position.x - 300)/16f); col < Math.min((camera.position.x + 300)/16f, map.getWidth()); col++)
 		{
-			for (int row = 0; row < map.getHeight(); row++)
+			for (int row = (int)Math.max(0, (camera.position.y - 150)/16f); row < Math.min((camera.position.y + 150)/16f, map.getHeight()); row++)
 			{
 				if (map.get(col, row) == Tile.AIR)
 				{

@@ -5,20 +5,32 @@ import com.artlessavian.umbrellagame.game.ecs.components.PlayerComponent;
 
 public class CommonFuncs
 {
-	public static void limitSpeedX(PhysicsComponent physicsC, float limit)
-	{
-		if (physicsC.vel.x > limit) {physicsC.vel.x = limit;}
-		if (physicsC.vel.x < -limit) {physicsC.vel.x = -limit;}
-	}
-	public static void accelX(PhysicsComponent physicsC, boolean right, float accel)
+
+	public static void accelX(PhysicsComponent physicsC, boolean right, float accel, float limit)
 	{
 		if (right)
 		{
+			if (physicsC.vel.x >= limit)
+			{
+				return;
+			}
 			physicsC.vel.x += accel;
+			if (physicsC.vel.x >= limit)
+			{
+				physicsC.vel.x = limit;
+			}
 		}
 		else
 		{
+			if (physicsC.vel.x <= -limit)
+			{
+				return;
+			}
 			physicsC.vel.x -= accel;
+			if (physicsC.vel.x <= -limit)
+			{
+				physicsC.vel.x = -limit;
+			}
 		}
 	}
 	public static void deccelX(PhysicsComponent physicsC, float deccel)

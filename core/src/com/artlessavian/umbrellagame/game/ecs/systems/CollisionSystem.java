@@ -1,6 +1,7 @@
 package com.artlessavian.umbrellagame.game.ecs.systems;
 
 import com.artlessavian.umbrellagame.game.Map;
+import com.artlessavian.umbrellagame.game.MapInterface;
 import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.CollisionComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
@@ -13,9 +14,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class CollisionSystem extends IteratingSystem
 {
-	private Map map;
+	private MapInterface map;
 
-	public CollisionSystem(Map map)
+	public CollisionSystem(MapInterface map)
 	{
 		super(Family.all(PhysicsComponent.class, CollisionComponent.class).get());
 		this.map = map;
@@ -33,13 +34,16 @@ public class CollisionSystem extends IteratingSystem
 
 		PlayerComponent playerC = entity.getComponent(PlayerComponent.class);
 
-		collisionC.getHead(temp, physicsC.pos);
-		if (map.get((int)(temp.x / 16), (int)(temp.y / 16)).solid)
+		if (physicsC.vel.y > 0)
 		{
-			physicsC.vel.y = 0;
-			physicsC.pos.y = (int)(temp.y / 16f) * 16 - collisionC.feet;
-			physicsC.grounded = false;
-			collisionC.collisionBehavior.onPineapple();
+			collisionC.getHead(temp, physicsC.pos);
+			if (map.get((int)(temp.x / 16), (int)(temp.y / 16)).solid)
+			{
+				physicsC.vel.y = 0;
+				physicsC.pos.y = (int)(temp.y / 16f) * 16 - collisionC.feet;
+				physicsC.grounded = false;
+				collisionC.collisionBehavior.onPineapple();
+			}
 		}
 
 		if (physicsC.vel.x < 0)

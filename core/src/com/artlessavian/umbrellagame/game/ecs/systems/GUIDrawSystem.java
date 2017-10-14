@@ -31,6 +31,6 @@ public class GUIDrawSystem extends EntitySystem
 	public void update(float deltaTime)
 	{
 		batch.setProjectionMatrix(screenSpace.combined);
-		font.draw(batch, "Wetness: " + Math.ceil(p.playerC.wetness * 1000)/10 + "%", 50, 400);
+		font.draw(batch, "Dryness: " + Math.ceil(p.playerC.wetness * 1000)/10 + "%", 50, 400);
 	}
 }

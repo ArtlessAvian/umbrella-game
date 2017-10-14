@@ -29,7 +29,7 @@ public class Maineroni extends Game
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0.3f, 0.2f, 0.2f, 1);
+		Gdx.gl.glClearColor(0.1f, 0.2f, 0.3f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		if (onComputerDebug)
