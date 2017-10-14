@@ -25,6 +25,12 @@ public class JumpState extends State<Player>
 	}
 
 	@Override
+	public void checkTransition()
+	{
+
+	}
+
+	@Override
 	public void update(float deltaT)
 	{
 

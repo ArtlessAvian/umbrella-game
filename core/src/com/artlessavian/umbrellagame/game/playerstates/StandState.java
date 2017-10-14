@@ -24,6 +24,19 @@ public class StandState extends State<Player>
 	}
 
 	@Override
+	public void checkTransition()
+	{
+		if (e.controlC.control.right != e.controlC.control.left)
+		{
+			sm.state = new WalkState(sm, e);
+		}
+		if (e.controlC.control.a)
+		{
+			sm.state = new JumpState(sm, e);
+		}
+	}
+
+	@Override
 	public void update(float deltaT)
 	{
 

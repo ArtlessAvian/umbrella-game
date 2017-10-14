@@ -20,5 +20,6 @@ public abstract class State<E>
 
 	public abstract void enter();
 	public abstract void exit();
+	public abstract void checkTransition();
 	public abstract void update(float deltaT);
 }
