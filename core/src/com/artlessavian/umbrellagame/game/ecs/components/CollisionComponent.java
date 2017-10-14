@@ -10,6 +10,8 @@ public class CollisionComponent implements Component
 	public float width;
 	public float feet; // down from center
 
+	public CollisionBehavior collisionBehavior;
+
 	public void getLeft(Rectangle r, Vector2 center)
 	{
 		r.setHeight(sideHeight);
@@ -30,5 +32,13 @@ public class CollisionComponent implements Component
 	{
 		v.set(center);
 		v.y -= feet;
+	}
+
+	public static interface CollisionBehavior
+	{
+		void onFloor();
+		void onLeft();
+		void onRight();
+		void onFallOff();
 	}
 }

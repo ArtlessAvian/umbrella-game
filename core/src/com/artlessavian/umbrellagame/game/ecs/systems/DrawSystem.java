@@ -37,8 +37,6 @@ public class DrawSystem extends IteratingSystem
 		this.camera.update();
 		batch.setProjectionMatrix(this.camera.combined);
 
-		batch.begin();
-
 		for (int col = 0; col < map.getWidth(); col++)
 		{
 			for (int row = 0; row < map.getHeight(); row++)
@@ -56,7 +54,6 @@ public class DrawSystem extends IteratingSystem
 		}
 
 		super.update(deltaTime);
-		batch.end();
 	}
 
 	@Override

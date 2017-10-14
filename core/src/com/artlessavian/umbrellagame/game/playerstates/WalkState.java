@@ -25,14 +25,34 @@ public class WalkState extends State<Player>
 	}
 
 	@Override
-	public void checkTransition()
+	public boolean checkTransition()
 	{
-
+		if (e.controlC.control.a)
+		{
+			sm.state = new JumpState(sm, e, true);
+			return true;
+		}
+		if (e.controlC.control.right == e.controlC.control.left)
+		{
+			e.stateC.state = new StandState(sm, e);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public void update(float deltaT)
 	{
-
+		if (e.controlC.control.right != e.controlC.control.left)
+		{
+			if (e.controlC.control.right)
+			{
+				e.physicsC.vel.x = 30;
+			}
+			else
+			{
+				e.physicsC.vel.x = -30;
+			}
+		}
 	}
 }

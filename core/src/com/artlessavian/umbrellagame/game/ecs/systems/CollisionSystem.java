@@ -32,23 +32,36 @@ public class CollisionSystem extends IteratingSystem
 
 		PlayerComponent playerC = entity.getComponent(PlayerComponent.class);
 
-//		if (playerC != null && playerC.facingLeft)
-//		{
-//			checkLeft(collisionC, physicsC);
-//			checkRight(collisionC, physicsC);
-//		}
-//		else
-//		{
-//			checkRight(collisionC, physicsC);
-//			checkLeft(collisionC, physicsC);
-//		}
+		if (physicsC.vel.x < 0)
+		{
+			checkLeft(collisionC, physicsC);
+			checkRight(collisionC, physicsC);
+		}
+		else
+		{
+			checkRight(collisionC, physicsC);
+			checkLeft(collisionC, physicsC);
+		}
 
 		collisionC.getFeet(temp, physicsC.pos);
-		if (map.get((int)(temp.x / 16), (int)(temp.y / 16)).solid)
+		if (!physicsC.grounded)
 		{
-			physicsC.pos.y = (int)(temp.y / 16f + 1) * 16 + collisionC.feet;
-			System.out.println("collided down");
-			System.out.println(physicsC.pos.y);
+			if (physicsC.vel.y <= 0)
+			if (map.get((int)(temp.x / 16), (int)(temp.y / 16)).solid)
+			{
+				physicsC.vel.y = 0;
+				physicsC.pos.y = (int)(temp.y / 16f + 1) * 16 + collisionC.feet;
+				physicsC.grounded = true;
+				collisionC.collisionBehavior.onFloor();
+			}
+		}
+		else
+		{
+			if (!map.get((int)(temp.x / 16), (int)(temp.y / 16 - 0.000001)).solid)
+			{
+				physicsC.grounded = false;
+				collisionC.collisionBehavior.onFallOff();
+			}
 		}
 	}
 

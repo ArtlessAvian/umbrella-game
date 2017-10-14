@@ -13,8 +13,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Maineroni extends Game
 {
 	public SpriteBatch batch;
-	BitmapFont font;
-	ControlContainer control;
+	public BitmapFont font;
+	public ControlContainer control = new ControlContainer();
 	private boolean onComputerDebug;
 
 	@Override
@@ -34,12 +34,12 @@ public class Maineroni extends Game
 
 		if (onComputerDebug)
 		{
-			control.a = Gdx.input.isButtonPressed(Input.Keys.J);
-			control.b = Gdx.input.isButtonPressed(Input.Keys.N);
-			control.up = Gdx.input.isButtonPressed(Input.Keys.W);
-			control.down = Gdx.input.isButtonPressed(Input.Keys.S);
-			control.left = Gdx.input.isButtonPressed(Input.Keys.A);
-			control.right = Gdx.input.isButtonPressed(Input.Keys.D);
+			control.a = Gdx.input.isKeyPressed(Input.Keys.J);
+			control.b = Gdx.input.isKeyPressed(Input.Keys.N);
+			control.up = Gdx.input.isKeyPressed(Input.Keys.W);
+			control.down = Gdx.input.isKeyPressed(Input.Keys.S);
+			control.left = Gdx.input.isKeyPressed(Input.Keys.A);
+			control.right = Gdx.input.isKeyPressed(Input.Keys.D);
 		}
 
 		super.render();

@@ -14,12 +14,16 @@ public abstract class State<E>
 
 	public State(StateMachine sm, E e)
 	{
+		System.out.println(this.getClass());
 		this.sm = sm;
 		this.e = e;
 	}
 
-	public abstract void enter();
-	public abstract void exit();
-	public abstract void checkTransition();
+	@Deprecated
+	public void enter() {}
+	@Deprecated
+	public void exit() {}
+
+	public abstract boolean checkTransition();
 	public abstract void update(float deltaT);
 }

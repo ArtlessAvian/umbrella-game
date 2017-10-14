@@ -3,10 +3,10 @@ package com.artlessavian.umbrellagame.game;
 import com.artlessavian.umbrellagame.Maineroni;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
-import com.artlessavian.umbrellagame.game.ecs.systems.CollisionSystem;
-import com.artlessavian.umbrellagame.game.ecs.systems.DrawSystem;
-import com.artlessavian.umbrellagame.game.ecs.systems.PhysicsSystem;
+import com.artlessavian.umbrellagame.game.ecs.systems.*;
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 
 import static com.artlessavian.umbrellagame.game.Tile.SOMETHING;
@@ -17,7 +17,10 @@ public class GameScreen implements Screen
 	private Engine engine;
 
 	private Map map;
+
 	DrawSystem drawSystem;
+	GUIDrawSystem guiDrawSystem;
+	DebugDrawSystem debugDrawSystem;
 
 	Player p;
 
@@ -28,15 +31,24 @@ public class GameScreen implements Screen
 
 		map = new Map("levels/1.txt");
 
+		engine.addSystem(new StateSystem());
 		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new CollisionSystem(map));
-//		engine.addSystem(new PhysicsSystem());
+
 		drawSystem = new DrawSystem(main.batch, map);
 		drawSystem.setProcessing(false);
 		engine.addSystem(drawSystem);
 
-		p = new Player();
+		p = new Player(main.control);
 		engine.addEntity(p);
+
+		guiDrawSystem = new GUIDrawSystem(main.batch, main.font, p);
+		guiDrawSystem.setProcessing(false);
+		engine.addSystem(guiDrawSystem);
+
+		debugDrawSystem = new DebugDrawSystem(main.batch, main.font, p);
+		debugDrawSystem.setProcessing(false);
+		engine.addSystem(debugDrawSystem);
 	}
 
 	@Override
@@ -45,18 +57,36 @@ public class GameScreen implements Screen
 
 	}
 
+	private boolean timeStop;
 	float updateRate = 1/60f;
 	float rollover = 0;
 
 	@Override
 	public void render(float delta)
 	{
-		rollover += delta;
+		if (Gdx.input.isKeyJustPressed(Input.Keys.MINUS)) {timeStop = !timeStop;}
+		if (!timeStop)
+		{
+			rollover += delta;
+		}
+		else
+		{
+			if (Gdx.input.isKeyJustPressed(Input.Keys.EQUALS))
+			{
+				rollover += updateRate;
+			}
+		}
+
 		for (; rollover > updateRate; rollover -= updateRate)
 		{
 			engine.update(updateRate);
 		}
+
+		main.batch.begin();
 		drawSystem.update(0);
+		guiDrawSystem.update(0);
+		debugDrawSystem.update(0);
+		main.batch.end();
 	}
 
 	@Override

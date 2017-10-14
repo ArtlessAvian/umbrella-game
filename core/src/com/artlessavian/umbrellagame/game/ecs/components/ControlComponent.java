@@ -6,4 +6,9 @@ import com.badlogic.ashley.core.Component;
 public class ControlComponent implements Component
 {
 	public ControlContainer control;
+
+	public ControlComponent(ControlContainer cc)
+	{
+		control = cc;
+	}
 }

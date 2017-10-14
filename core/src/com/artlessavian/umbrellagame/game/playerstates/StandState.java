@@ -6,7 +6,7 @@ import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 
 public class StandState extends State<Player>
 {
-	StandState(StateMachine sm, Player player)
+	public StandState(StateMachine sm, Player player)
 	{
 		super(sm, player);
 	}
@@ -24,21 +24,25 @@ public class StandState extends State<Player>
 	}
 
 	@Override
-	public void checkTransition()
+	public boolean checkTransition()
 	{
+		if (e.controlC.control.a)
+		{
+			sm.state = new JumpState(sm, e, true);
+			return true;
+		}
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
 			sm.state = new WalkState(sm, e);
+			return true;
 		}
-		if (e.controlC.control.a)
-		{
-			sm.state = new JumpState(sm, e);
-		}
+		return false;
 	}
 
 	@Override
 	public void update(float deltaT)
 	{
-
+		e.physicsC.vel.x -= Math.signum(e.physicsC.vel.x) * 0.3;
+		e.physicsC.vel.y = 0;
 	}
 }
