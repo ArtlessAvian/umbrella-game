@@ -29,6 +29,7 @@ public class AutoMap implements MapInterface
 
 	public float magicFunction(float x)
 	{
+//		return 1;
 		return (float)(square(x / 10, 0.1f) * Math.sin(x / 13) * 7 + Math.sin(x / 10)) * 2 + 10;
 	}
 

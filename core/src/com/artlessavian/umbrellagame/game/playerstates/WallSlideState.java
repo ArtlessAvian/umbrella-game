@@ -78,8 +78,12 @@ public class WallSlideState extends State<Player>
 =======
 		validSlide += deltaT;
 
+<<<<<<< HEAD
 >>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		e.spriteC.sprite.setColor(Color.RED);
+=======
+		e.spriteC.fromSheet(3, 1, 4, 4);
+>>>>>>> 6e644aae3835346a44aeda61f015e92b988e5b26
 
 		if (e.controlC.control.down)
 		{

@@ -17,6 +17,7 @@ public class FastFallState extends State<Player>
 	{
 		super(sm, e);
 		e.physicsC.gravityAcc = 1200;
+		e.spriteC.fromSheet(3, 0, 4, 4);
 	}
 
 	@Override
@@ -33,8 +34,6 @@ public class FastFallState extends State<Player>
 	@Override
 	public void update(float deltaT)
 	{
-		e.spriteC.sprite.setColor(Color.GRAY);
-
 		if (e.physicsC.vel.y < -FAST_FALL_MAX_SPEED) {e.physicsC.vel.y = -FAST_FALL_MAX_SPEED;}
 
 <<<<<<< HEAD

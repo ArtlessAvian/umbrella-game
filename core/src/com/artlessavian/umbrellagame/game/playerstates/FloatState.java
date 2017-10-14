@@ -40,10 +40,13 @@ public class FloatState extends State<Player>
 		return false;
 	}
 
+	float timeInState = 0;
+
 	@Override
 	public void update(float deltaT)
 	{
-		e.spriteC.sprite.setColor(Color.PURPLE);
+		timeInState += deltaT;
+		e.spriteC.fromSheet(((int)(timeInState / 0.3f)) % 3, 1, 4, 4);
 
 		if (e.physicsC.vel.y < -FALL_MAX_SPEED)
 		{

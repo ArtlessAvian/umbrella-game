@@ -62,10 +62,21 @@ public class WalkState extends State<Player>
 		return false;
 	}
 
+	float dist = 0;
+
 	@Override
 	public void update(float deltaT)
 	{
-		e.spriteC.sprite.setColor(Color.CHARTREUSE);
+		dist += deltaT * Math.abs(e.physicsC.vel.x) / 30f;
+		int pos = ((int)(dist)) % 6;
+		if (pos < 4)
+		{
+			e.spriteC.fromSheet(pos, 2, 4, 4);
+		}
+		else
+		{
+			e.spriteC.fromSheet(pos - 4, 3, 4, 4);
+		}
 
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
