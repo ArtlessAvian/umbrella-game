@@ -1,6 +1,7 @@
 package com.artlessavian.umbrellagame.game.ecs.systems;
 
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
+//import com.artlessavian.umbrellagame.game.ecs.entities.Poof;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -29,13 +30,14 @@ public class PhysicsSystem extends IteratingSystem
 			physicsC.pos.y -= 1 / 2f * physicsC.gravityAcc * deltaTime * deltaTime;
 			physicsC.vel.y -= physicsC.gravityAcc * deltaTime;
 		}
-<<<<<<< HEAD
-=======
+//		else if (Math.random() < 0.01f)
+//		{
+//			getEngine().addEntity(new Poof(physicsC.pos, getEngine()));
+//		}
 
 //		if (physicsC.pos.y < -300)
 //		{
 //			getEngine().removeEntity(entity);
 //		}
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 	}
 }

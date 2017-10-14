@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-package com.artlessavian.umbrellagame.game.playerstates;
 
+<<<<<<< HEAD
 import com.artlessavian.umbrellagame.game.State;
 import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
@@ -40,6 +39,8 @@ public class DashState extends State<Player>
 	}
 }
 =======
+=======
+>>>>>>> 9cb5741bcf34300ee9411cff4140f49ebf1bef1b
 //package com.artlessavian.umbrellagame.game.playerstates;
 //
 //import com.artlessavian.umbrellagame.game.State;
@@ -79,4 +80,3 @@ public class DashState extends State<Player>
 //
 //	}
 //}
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2

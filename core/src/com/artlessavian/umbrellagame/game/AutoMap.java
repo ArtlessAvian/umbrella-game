@@ -4,11 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import static com.artlessavian.umbrellagame.game.Tile.*;
 
-public class AutoMap implements MapInterface
+public class AutoMap
 {
-	private Tile[] tileSet;
-	private Vector2 startPos;
-
 	public AutoMap()
 	{
 
@@ -52,7 +49,7 @@ public class AutoMap implements MapInterface
 		return (float)(square(x / 8, 0.6f));
 	}
 
-	@Override
+//	@Override
 	public Vector2 getStart()
 	{
 		return new Vector2(30, mainTerrain(30) + 5);
@@ -61,14 +58,14 @@ public class AutoMap implements MapInterface
 	public Tile get(int x, int y)
 	{
 		float magic = mainTerrain(x);
-		switch (getBiome(x))
-		{
-			case 0 : {magic += spikeVariation(x); break;}
-//			case 1 : {magic += holeVariation(x); break;}
-//			case 2 : {magic += 0; break;}
-//			case 3 : {magic = Math.max(magic, 35); break;}
-		}
-		
+//		switch (getBiome(x))
+//		{
+//			case 0 : {magic += spikeVariation(x); break;}
+////			case 1 : {magic += holeVariation(x); break;}
+////			case 2 : {magic += 0; break;}
+////			case 3 : {magic = Math.max(magic, 35); break;}
+//		}
+
 		if (magic > y)
 		{
 

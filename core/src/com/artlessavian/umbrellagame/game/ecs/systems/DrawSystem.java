@@ -1,24 +1,20 @@
 package com.artlessavian.umbrellagame.game.ecs.systems;
 
 import com.artlessavian.umbrellagame.Maineroni;
-import com.artlessavian.umbrellagame.game.MapInterface;
+import com.artlessavian.umbrellagame.game.AutoMap;
 import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.PlayerComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
-<<<<<<< HEAD
-import com.artlessavian.umbrellagame.game.ecs.entities.RainParticle;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-=======
 //import com.artlessavian.umbrellagame.game.ecs.entities.RainParticle;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -27,19 +23,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class DrawSystem extends IteratingSystem
 {
 	private SpriteBatch batch;
-	private MapInterface map;
+	private AutoMap map;
 	private Player p;
-	private OrthographicCamera camera;
+	static OrthographicCamera camera;
 
 	private Texture cloun;
-<<<<<<< HEAD
-=======
 	private Texture rain;
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
-
 	private Sprite tileFlyweight;
 
-	public DrawSystem(SpriteBatch batch, MapInterface map, Player p)
+	public DrawSystem(SpriteBatch batch, AutoMap map, Player p)
 	{
 		super(Family.all(SpriteComponent.class).get());
 		this.batch = batch;
@@ -49,10 +41,7 @@ public class DrawSystem extends IteratingSystem
 		this.camera.position.set(map.getStart(), 0);
 //		this.camera.zoom = 5f;
 
-<<<<<<< HEAD
-=======
 		rain = new Texture("rain.png");
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		cloun = new Texture("cloun.png");
 
 		tileFlyweight = new Sprite();
@@ -61,12 +50,6 @@ public class DrawSystem extends IteratingSystem
 	@Override
 	public void update(float deltaTime)
 	{
-<<<<<<< HEAD
-//		for (int i = 0; i < 10; i++)
-=======
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
-//		this.getEngine().addEntity(new RainParticle(p.physicsC.pos, 0, this.getEngine()));
-
 		camera.position.x = (camera.position.x * 49 + p.physicsC.vel.x + p.physicsC.pos.x) / 50;
 		camera.position.y = p.physicsC.pos.y;
 
@@ -76,15 +59,12 @@ public class DrawSystem extends IteratingSystem
 		{
 			batch.draw(cloun, -(camera.position.x / 3 % 300) + i * 300 - 100, 450 - 150);
 		}
-<<<<<<< HEAD
-=======
 
 		for (int i = 0; i < 100; i++)
 		{
 			batch.draw(rain, (float)(Math.sin(i + Gdx.graphics.getFrameId()) * 400 + 400), (float)(Math.sqrt(i) * 450/10f));
 		}
 
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		for (int i = 0; i < 4; i++)
 		{
 			batch.draw(cloun, -(camera.position.x / 2 % 300) + i * 300 - 100, 450 - 100);
@@ -127,7 +107,7 @@ public class DrawSystem extends IteratingSystem
 		}
 		if (playerC != null)
 		{
-			spriteC.sprite.setFlip(playerC.facingLeft, false);
+			spriteC.sprite.setFlip(physicsC.facingLeft, false);
 		}
 
 		spriteC.sprite.draw(batch);

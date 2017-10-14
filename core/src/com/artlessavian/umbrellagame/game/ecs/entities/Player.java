@@ -1,6 +1,7 @@
 package com.artlessavian.umbrellagame.game.ecs.entities;
 
 import com.artlessavian.umbrellagame.game.ControlContainer;
+import com.artlessavian.umbrellagame.game.OffsetRectangle;
 import com.artlessavian.umbrellagame.game.ecs.components.*;
 import com.artlessavian.umbrellagame.game.playerstates.*;
 import com.badlogic.ashley.core.Entity;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity
 {
+	public final HitboxComponent hitboxC;
 	public PhysicsComponent physicsC;
 	public CollisionComponent collisionC;
 	public ControlComponent controlC;
@@ -42,6 +44,12 @@ public class Player extends Entity
 		stateC = new StateComponent();
 		stateC.state = new FloatState(stateC, this);
 
+		hitboxC = new HitboxComponent();
+		hitboxC.behavior = new PlayerHitBehavior();
+		hitboxC.hurtbox = new OffsetRectangle(-8, -16, 16, 32);
+		hitboxC.team = 0;
+		this.add(hitboxC);
+
 		this.add(physicsC);
 		this.add(collisionC);
 		this.add(controlC);
@@ -55,28 +63,27 @@ public class Player extends Entity
 		@Override
 		public void onFloor()
 		{
+			hitboxC.hitbox = null;
+			hitboxC.cannotHit.clear();
 			stateC.state = new StandState(stateC.state.sm, (Player)stateC.state.e);
 		}
 
 		@Override
 		public void onLeft()
 		{
-<<<<<<< HEAD
-=======
 			if (stateC.state.getClass() == WallSlideState.class)
 			{
 				((WallSlideState)(stateC.state)).validSlide = 0;
 				return;
 			}
 
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
-			if (physicsC.grounded)
+			if (physicsC.grounded && stateC.state.getClass() == WalkState.class)
 			{
 				stateC.state = new StandState(stateC.state.sm, (Player)stateC.state.e);
 			}
 			else if (physicsC.vel.y < 0)
 			{
-				playerC.facingLeft = false;
+				physicsC.facingLeft = false;
 				stateC.state = new WallSlideState(stateC.state.sm, (Player)stateC.state.e);
 			}
 		}
@@ -84,22 +91,19 @@ public class Player extends Entity
 		@Override
 		public void onRight()
 		{
-<<<<<<< HEAD
-=======
 			if (stateC.state.getClass() == WallSlideState.class)
 			{
 				((WallSlideState)(stateC.state)).validSlide = 0;
 				return;
 			}
 
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
-			if (physicsC.grounded)
+			if (physicsC.grounded && stateC.state.getClass() == WalkState.class)
 			{
 				stateC.state = new StandState(stateC.state.sm, (Player)stateC.state.e);
 			}
 			else if (physicsC.vel.y < 0)
 			{
-				playerC.facingLeft = true;
+				physicsC.facingLeft = true;
 				stateC.state = new WallSlideState(stateC.state.sm, (Player)stateC.state.e);
 			}
 		}
@@ -107,6 +111,8 @@ public class Player extends Entity
 		@Override
 		public void onFallOff()
 		{
+			hitboxC.hitbox = null;
+			hitboxC.cannotHit.clear();
 			stateC.state = new JumpState(stateC.state.sm, (Player)stateC.state.e, false);
 		}
 
@@ -114,6 +120,21 @@ public class Player extends Entity
 		public void onPineapple()
 		{
 
+		}
+	}
+
+	private class PlayerHitBehavior implements HitboxComponent.HitBehavior
+	{
+		@Override
+		public void onHit(Entity thisEntity, Entity other)
+		{
+			hitboxC.cannotHit.add(other);
+		}
+
+		@Override
+		public void onGetHit(Entity thisEntity, Entity other)
+		{
+			playerC.wetness -= 0.3;
 		}
 	}
 }

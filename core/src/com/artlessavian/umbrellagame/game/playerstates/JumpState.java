@@ -7,13 +7,8 @@ import com.badlogic.gdx.graphics.Color;
 
 public class JumpState extends State<Player>
 {
-<<<<<<< HEAD
-	final float MAX_AIR_SPEED = 80;
-	final float AIR_ACCEL = 4;
-=======
 	final static float MAX_AIR_SPEED = 80;
 	final static float AIR_ACCEL = 4;
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 
 	private boolean doJump;
 	
@@ -42,6 +37,11 @@ public class JumpState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
+		if (e.controlC.control.swing)
+		{
+			sm.state = new ASwingState(sm, e);
+			return true;
+		}
 		if (e.physicsC.vel.y < 0)
 		{
 			e.stateC.state = new FloatState(sm, e);
@@ -63,18 +63,14 @@ public class JumpState extends State<Player>
 
 		if (!e.controlC.control.jump)
 		{
-<<<<<<< HEAD
-			e.physicsC.gravityAcc = 600;
-=======
 			e.physicsC.gravityAcc = 1000;
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		}
 
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
 
 			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, AIR_ACCEL, MAX_AIR_SPEED);
-			e.playerC.facingLeft = !e.controlC.control.right;
+			e.physicsC.facingLeft = !e.controlC.control.right;
 		}
 		else
 		{

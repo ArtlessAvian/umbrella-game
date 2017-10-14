@@ -7,16 +7,16 @@ import com.badlogic.gdx.graphics.Color;
 
 public class WallSlideState extends State<Player>
 {
-<<<<<<< HEAD
-=======
 	public float validSlide;
 
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 	public WallSlideState(StateMachine sm, Player player)
 	{
 		super(sm, player);
 		e.physicsC.vel.y = 0;
 		e.physicsC.gravityAcc = 30;
+
+
+		e.spriteC.fromSheet(3, 1, 4, 4);
 	}
 
 	@Override
@@ -34,8 +34,6 @@ public class WallSlideState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
-<<<<<<< HEAD
-=======
 		System.out.println(validSlide);
 		if (validSlide > 0.03f)
 		{
@@ -43,10 +41,9 @@ public class WallSlideState extends State<Player>
 			return true;
 		}
 
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		if (e.controlC.control.jump)
 		{
-			if (e.playerC.facingLeft)
+			if (e.physicsC.facingLeft)
 			{
 				e.physicsC.vel.x = -85;
 			}
@@ -58,12 +55,12 @@ public class WallSlideState extends State<Player>
 			sm.state = new JumpState(sm, e, false);
 			return true;
 		}
-		if (e.controlC.control.left && e.playerC.facingLeft)
+		if (e.controlC.control.left && e.physicsC.facingLeft)
 		{
 			sm.state = new JumpState(sm, e, false);
 			return true;
 		}
-		if (e.controlC.control.right && !e.playerC.facingLeft)
+		if (e.controlC.control.right && !e.physicsC.facingLeft)
 		{
 			sm.state = new JumpState(sm, e, false);
 			return true;
@@ -74,25 +71,16 @@ public class WallSlideState extends State<Player>
 	@Override
 	public void update(float deltaT)
 	{
-<<<<<<< HEAD
-=======
 		validSlide += deltaT;
 
-<<<<<<< HEAD
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
-		e.spriteC.sprite.setColor(Color.RED);
-=======
 		e.spriteC.fromSheet(3, 1, 4, 4);
->>>>>>> 6e644aae3835346a44aeda61f015e92b988e5b26
 
 		if (e.controlC.control.down)
 		{
 			e.physicsC.vel.y -= 2;
 		}
 
-<<<<<<< HEAD
-=======
-		if (e.playerC.facingLeft)
+		if (e.physicsC.facingLeft)
 		{
 			e.physicsC.vel.x = 1;
 		}
@@ -100,8 +88,6 @@ public class WallSlideState extends State<Player>
 		{
 			e.physicsC.vel.x = -1;
 		}
-
->>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		CommonFuncs.editWet(e.playerC, -0.2f, deltaT);
 	}
 }
