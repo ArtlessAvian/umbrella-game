@@ -2,8 +2,7 @@ package com.artlessavian.umbrellagame.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-import static com.artlessavian.umbrellagame.game.Tile.AIR;
-import static com.artlessavian.umbrellagame.game.Tile.SOMETHING;
+import static com.artlessavian.umbrellagame.game.Tile.*;
 
 public class AutoMap implements MapInterface
 {
@@ -27,23 +26,61 @@ public class AutoMap implements MapInterface
 		}
 	}
 
-	public float magicFunction(float x)
+	public float mainTerrain(float x)
+	{
+		return (float)(Math.sin(x / 10) * 4 + 20);
+	}
+
+	public int getBiome(float x)
+	{
+		return (int)(Math.tan(x/100)) % 1;
+	}
+
+	public float spikeVariation(float x)
 	{
 //		return 1;
-		return (float)(square(x / 10, 0.1f) * Math.sin(x / 13) * 7 + Math.sin(x / 10)) * 2 + 10;
+		return (float)(square(x / 20, 0.1f) * Math.abs(Math.sin(x / 2)) * 2);
+	}
+
+	public float holeVariation(float x)
+	{
+		return (float)(Math.sin(x/3) * Math.sin(x/8) * 3 - Math.sin(x/7)) * 2 + 18;
+	}
+
+	public float cityVariation(float x)
+	{
+		return (float)(square(x / 8, 0.6f));
 	}
 
 	@Override
 	public Vector2 getStart()
 	{
-		return new Vector2(10, magicFunction(10) + 5);
+		return new Vector2(30, mainTerrain(30) + 5);
 	}
 
 	public Tile get(int x, int y)
 	{
-		if (magicFunction(x) > y)
+		float magic = mainTerrain(x);
+		switch (getBiome(x))
 		{
-			return SOMETHING;
+			case 0 : {magic += spikeVariation(x); break;}
+//			case 1 : {magic += holeVariation(x); break;}
+//			case 2 : {magic += 0; break;}
+//			case 3 : {magic = Math.max(magic, 35); break;}
+		}
+		
+		if (magic > y)
+		{
+
+			if (magic < y + 1)
+			{
+				return GRASS;
+			}
+			if (magic > y + 5 + Math.sin(x / 30) * Math.sin(x / 13) * 4)
+			{
+				return STONE;
+			}
+			return DIRT;
 		}
 		else
 		{

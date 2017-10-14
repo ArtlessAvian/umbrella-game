@@ -81,7 +81,7 @@ public class DrawSystem extends IteratingSystem
 
 		for (int i = 0; i < 100; i++)
 		{
-			batch.draw(rain, (float)(Math.sin(i + Gdx.graphics.getFrameId()) * 400 + 400), i * 450/100f);
+			batch.draw(rain, (float)(Math.sin(i + Gdx.graphics.getFrameId()) * 400 + 400), (float)(Math.sqrt(i) * 450/10f));
 		}
 
 >>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
@@ -104,6 +104,7 @@ public class DrawSystem extends IteratingSystem
 				}
 
 				tileFlyweight.setTexture(map.get(col, row).getTex());
+				map.get(col, row).setUV(tileFlyweight);
 				tileFlyweight.setSize(16, 16);
 				tileFlyweight.setPosition(col * 16, row * 16);
 				tileFlyweight.draw(batch);
