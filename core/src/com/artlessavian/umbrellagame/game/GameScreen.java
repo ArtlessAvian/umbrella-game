@@ -13,6 +13,8 @@ public class GameScreen implements Screen
 	private Maineroni main;
 	private Engine engine;
 
+	private Tile[][] tilemap;
+
 	DrawSystem drawSystem;
 
 	public GameScreen(Maineroni main)
@@ -20,10 +22,12 @@ public class GameScreen implements Screen
 		this.main = main;
 		this.engine = new Engine();
 
+		tilemap = new Tile[3][3];
+
 		engine.addSystem(new PhysicsSystem());
-		engine.addSystem(new CollisionSystem(null));
+		engine.addSystem(new CollisionSystem(tilemap));
 //		engine.addSystem(new PhysicsSystem());
-		drawSystem = new DrawSystem(main.batch);
+		drawSystem = new DrawSystem(main.batch, tilemap);
 		drawSystem.setProcessing(false);
 		engine.addSystem(drawSystem);
 

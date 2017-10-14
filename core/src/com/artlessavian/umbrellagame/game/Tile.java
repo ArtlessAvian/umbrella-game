@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public enum Tile
 {
-	SOMETHING(true, "tiles/something.png");
+	SOMETHING(true, "grid.png");
 
 	static float lmao = 0;
 	float checkValid = -1;
@@ -19,7 +19,7 @@ public enum Tile
 		this.imagePath = imagePath;
 	}
 
-	private Texture getTex()
+	public Texture getTex()
 	{
 		if (lmao != checkValid)
 		{
