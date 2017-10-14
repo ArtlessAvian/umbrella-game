@@ -1,7 +1,7 @@
 package com.artlessavian.umbrellagame.game.ecs.systems;
 
 import com.artlessavian.umbrellagame.Maineroni;
-import com.artlessavian.umbrellagame.game.MapInterface;
+import com.artlessavian.umbrellagame.game.AutoMap;
 import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.PlayerComponent;
@@ -20,16 +20,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class DrawSystem extends IteratingSystem
 {
 	private SpriteBatch batch;
-	private MapInterface map;
+	private AutoMap map;
 	private Player p;
-	private OrthographicCamera camera;
+	static OrthographicCamera camera;
 
 	private Texture cloun;
 	private Texture rain;
 
 	private Sprite tileFlyweight;
 
-	public DrawSystem(SpriteBatch batch, MapInterface map, Player p)
+	public DrawSystem(SpriteBatch batch, AutoMap map, Player p)
 	{
 		super(Family.all(SpriteComponent.class).get());
 		this.batch = batch;
@@ -107,7 +107,7 @@ public class DrawSystem extends IteratingSystem
 		}
 		if (playerC != null)
 		{
-			spriteC.sprite.setFlip(playerC.facingLeft, false);
+			spriteC.sprite.setFlip(physicsC.facingLeft, false);
 		}
 
 		spriteC.sprite.draw(batch);

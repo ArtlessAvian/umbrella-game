@@ -1,11 +1,12 @@
 package com.artlessavian.umbrellagame.game.ecs.systems;
 
-import com.artlessavian.umbrellagame.game.Map;
-import com.artlessavian.umbrellagame.game.MapInterface;
+//import com.artlessavian.umbrellagame.game.Map;
+import com.artlessavian.umbrellagame.game.AutoMap;
 import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.CollisionComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.PlayerComponent;
+//import com.artlessavian.umbrellagame.game.ecs.entities.Poof;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -14,9 +15,9 @@ import com.badlogic.gdx.math.Vector2;
 
 public class CollisionSystem extends IteratingSystem
 {
-	private MapInterface map;
+	private AutoMap map;
 
-	public CollisionSystem(MapInterface map)
+	public CollisionSystem(AutoMap map)
 	{
 		super(Family.all(PhysicsComponent.class, CollisionComponent.class).get());
 		this.map = map;
@@ -69,6 +70,9 @@ public class CollisionSystem extends IteratingSystem
 					physicsC.pos.y = (int)(temp.y / 16f + 1) * 16 + collisionC.feet;
 					physicsC.grounded = true;
 					collisionC.collisionBehavior.onFloor();
+
+//					collisionC.getFeetLeft(temp, physicsC.pos);
+//					getEngine().addEntity(new Poof(temp, getEngine()));
 				}
 				else if (map.get((int)(temp2.x / 16), (int)(temp2.y / 16)).solid)
 				{
@@ -76,6 +80,9 @@ public class CollisionSystem extends IteratingSystem
 					physicsC.pos.y = (int)(temp2.y / 16f + 1) * 16 + collisionC.feet;
 					physicsC.grounded = true;
 					collisionC.collisionBehavior.onFloor();
+
+//					collisionC.getFeetRight(temp2, physicsC.pos);
+//					getEngine().addEntity(new Poof(temp2, getEngine()));
 				}
 			}
 		}

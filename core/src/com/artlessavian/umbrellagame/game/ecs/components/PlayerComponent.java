@@ -8,6 +8,6 @@ public class PlayerComponent implements Component
 	// health?
 	// dunno
 
-	public boolean facingLeft;
+
 	public float wetness = 1; // is actually dryness lmao
 }

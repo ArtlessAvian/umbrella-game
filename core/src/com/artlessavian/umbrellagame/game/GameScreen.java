@@ -16,7 +16,7 @@ public class GameScreen implements Screen
 	private Maineroni main;
 	private Engine engine;
 
-	private MapInterface map;
+	private AutoMap map;
 
 	DrawSystem drawSystem;
 	GUIDrawSystem guiDrawSystem;
@@ -32,12 +32,15 @@ public class GameScreen implements Screen
 //		map = new Map("levels/1.txt");
 		map = new AutoMap();
 
+		p = new Player(main.control, map.getStart());
+		engine.addEntity(p);
+
 		engine.addSystem(new StateSystem());
 		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new CollisionSystem(map));
-
-		p = new Player(main.control, map.getStart());
-		engine.addEntity(p);
+		engine.addSystem(new HitboxCollisionSystem());
+		engine.addSystem(new PVESystem(map, p));
+		engine.addSystem(new RemovalSystem());
 
 		drawSystem = new DrawSystem(main.batch, map, p);
 		drawSystem.setProcessing(false);

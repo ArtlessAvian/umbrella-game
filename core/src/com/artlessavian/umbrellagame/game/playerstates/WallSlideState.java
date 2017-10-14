@@ -14,6 +14,9 @@ public class WallSlideState extends State<Player>
 		super(sm, player);
 		e.physicsC.vel.y = 0;
 		e.physicsC.gravityAcc = 30;
+
+
+		e.spriteC.fromSheet(3, 1, 4, 4);
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class WallSlideState extends State<Player>
 
 		if (e.controlC.control.jump)
 		{
-			if (e.playerC.facingLeft)
+			if (e.physicsC.facingLeft)
 			{
 				e.physicsC.vel.x = -85;
 			}
@@ -52,12 +55,12 @@ public class WallSlideState extends State<Player>
 			sm.state = new JumpState(sm, e, false);
 			return true;
 		}
-		if (e.controlC.control.left && e.playerC.facingLeft)
+		if (e.controlC.control.left && e.physicsC.facingLeft)
 		{
 			sm.state = new JumpState(sm, e, false);
 			return true;
 		}
-		if (e.controlC.control.right && !e.playerC.facingLeft)
+		if (e.controlC.control.right && !e.physicsC.facingLeft)
 		{
 			sm.state = new JumpState(sm, e, false);
 			return true;
@@ -70,14 +73,13 @@ public class WallSlideState extends State<Player>
 	{
 		validSlide += deltaT;
 
-		e.spriteC.fromSheet(3, 1, 4, 4);
 
 		if (e.controlC.control.down)
 		{
 			e.physicsC.vel.y -= 2;
 		}
 
-		if (e.playerC.facingLeft)
+		if (e.physicsC.facingLeft)
 		{
 			e.physicsC.vel.x = 1;
 		}

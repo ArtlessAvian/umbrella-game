@@ -19,6 +19,11 @@ public class FastFallState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
+		if (e.controlC.control.swing)
+		{
+			sm.state = new ASwingState(sm, e);
+			return true;
+		}
 		if (e.controlC.control.up)
 		{
 			e.stateC.state = new FloatState(sm, e);

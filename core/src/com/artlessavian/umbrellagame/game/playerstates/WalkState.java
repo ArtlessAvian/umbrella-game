@@ -31,11 +31,11 @@ public class WalkState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
-//		if (e.controlC.control.dash)
-//		{
-//			sm.state = new DashState(sm, e);
-//			return true;
-//		}
+		if (e.controlC.control.swing)
+		{
+			sm.state = new ASwingState(sm, e);
+			return true;
+		}
 		if (e.controlC.control.jump)
 		{
 			sm.state = new JumpState(sm, e, true);
@@ -68,7 +68,7 @@ public class WalkState extends State<Player>
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
 			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, WALK_ACCEL, WALK_MAX_SPEED);
-			e.playerC.facingLeft = !e.controlC.control.right;
+			e.physicsC.facingLeft = !e.controlC.control.right;
 		}
 
 		CommonFuncs.editWet(e.playerC, 0.02f, deltaT);

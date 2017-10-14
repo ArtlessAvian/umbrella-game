@@ -16,7 +16,8 @@ public class PhysicsComponent implements Component
 	// no acceleration, thats done by the system.
 
 	// is true if on ground.
-	public boolean grounded;
+	public boolean grounded = false;
+	public boolean facingLeft;
 
-	public float gravityAcc = 30; // insert magic number here
+	public float gravityAcc = 300; // insert magic number here
 }

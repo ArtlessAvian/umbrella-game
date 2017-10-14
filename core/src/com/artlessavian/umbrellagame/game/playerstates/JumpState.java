@@ -37,6 +37,11 @@ public class JumpState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
+		if (e.controlC.control.swing)
+		{
+			sm.state = new ASwingState(sm, e);
+			return true;
+		}
 		if (e.physicsC.vel.y < 0)
 		{
 			e.stateC.state = new FloatState(sm, e);
@@ -65,7 +70,7 @@ public class JumpState extends State<Player>
 		{
 
 			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, AIR_ACCEL, MAX_AIR_SPEED);
-			e.playerC.facingLeft = !e.controlC.control.right;
+			e.physicsC.facingLeft = !e.controlC.control.right;
 		}
 		else
 		{
