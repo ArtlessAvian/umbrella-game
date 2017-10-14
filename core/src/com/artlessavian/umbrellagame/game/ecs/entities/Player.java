@@ -24,13 +24,13 @@ public class Player extends Entity
 		physicsC.pos.y = 48;
 		physicsC.vel.y = 0;
 		physicsC.vel.x = 0;
-		physicsC.gravityAcc = 60;
+		physicsC.gravityAcc = 180;
 		physicsC.grounded = false;
 
 		collisionC = new CollisionComponent();
 		collisionC.feet = 16;
 		collisionC.width = 16;
-		collisionC.sideHeight = 30;
+		collisionC.sideHeight = 20;
 		collisionC.collisionBehavior = new PlayerCollisionBehavior();
 
 		controlC = new ControlComponent(cc);
@@ -64,8 +64,9 @@ public class Player extends Entity
 			{
 				stateC.state = new StandState(stateC.state.sm, (Player)stateC.state.e);
 			}
-			else
+			else if (physicsC.vel.y < 0)
 			{
+				playerC.facingLeft = false;
 				stateC.state = new WallSlideState(stateC.state.sm, (Player)stateC.state.e);
 			}
 		}
@@ -77,8 +78,9 @@ public class Player extends Entity
 			{
 				stateC.state = new StandState(stateC.state.sm, (Player)stateC.state.e);
 			}
-			else
+			else if (physicsC.vel.y < 0)
 			{
+				playerC.facingLeft = true;
 				stateC.state = new WallSlideState(stateC.state.sm, (Player)stateC.state.e);
 			}
 		}

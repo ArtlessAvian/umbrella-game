@@ -6,12 +6,17 @@ import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 
 public class JumpState extends State<Player>
 {
-	private boolean doJump;
+	final float MAX_AIR_SPEED = 80;
+	final float AIR_ACCEL = 9;
 
+	private boolean doJump;
+	
 	public JumpState(StateMachine sm, Player player, boolean doJump)
 	{
 		super(sm, player);
 		this.doJump = doJump;
+		e.physicsC.grounded = false;
+		e.physicsC.gravityAcc = 180;
 	}
 
 	@Override
@@ -37,24 +42,31 @@ public class JumpState extends State<Player>
 	{
 		if (doJump)
 		{
-			e.physicsC.vel.add(0, 30);
+			e.physicsC.vel.y = 150;
 			doJump = false;
+		}
+
+		if (!e.controlC.control.a || e.physicsC.vel.y <= 0)
+		{
+			// goto float
 		}
 
 		if (e.controlC.control.right != e.controlC.control.left)
 		{
 			if (e.controlC.control.right)
 			{
-				e.physicsC.vel.x = 30;
+				e.physicsC.vel.x += AIR_ACCEL;
 			}
 			else
 			{
-				e.physicsC.vel.x = -30;
+				e.physicsC.vel.x -= AIR_ACCEL;
 			}
+			if (e.physicsC.vel.x > MAX_AIR_SPEED) {e.physicsC.vel.x = MAX_AIR_SPEED;}
+			if (e.physicsC.vel.x < -MAX_AIR_SPEED) {e.physicsC.vel.x = -MAX_AIR_SPEED;}
 		}
 		else
 		{
-			e.physicsC.vel.x -= Math.signum(e.physicsC.vel.x) * 0.3;
+			e.physicsC.vel.x -= Math.signum(e.physicsC.vel.x) * 0.8;
 		}
 	}
 }

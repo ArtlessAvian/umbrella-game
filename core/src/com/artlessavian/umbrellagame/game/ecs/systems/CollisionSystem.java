@@ -35,12 +35,10 @@ public class CollisionSystem extends IteratingSystem
 		if (physicsC.vel.x < 0)
 		{
 			checkLeft(collisionC, physicsC);
-			checkRight(collisionC, physicsC);
 		}
-		else
+		else if (physicsC.vel.x > 0)
 		{
 			checkRight(collisionC, physicsC);
-			checkLeft(collisionC, physicsC);
 		}
 
 		collisionC.getFeet(temp, physicsC.pos);
@@ -51,13 +49,14 @@ public class CollisionSystem extends IteratingSystem
 			{
 				physicsC.vel.y = 0;
 				physicsC.pos.y = (int)(temp.y / 16f + 1) * 16 + collisionC.feet;
+				System.out.println(physicsC.pos.y);
 				physicsC.grounded = true;
 				collisionC.collisionBehavior.onFloor();
 			}
 		}
 		else
 		{
-			if (!map.get((int)(temp.x / 16), (int)(temp.y / 16 - 0.000001)).solid)
+			if (!map.get((int)(temp.x / 16), (int)(temp.y / 16 - 0.0001)).solid)
 			{
 				physicsC.grounded = false;
 				collisionC.collisionBehavior.onFallOff();
@@ -67,40 +66,38 @@ public class CollisionSystem extends IteratingSystem
 
 	private void checkLeft(CollisionComponent collisionC, PhysicsComponent physicsC)
 	{
-//		collisionC.getLeft(rect, physicsC.pos);
-//		for (int x = (int)Math.floor(rect.x / 16); x <= Math.ceil((rect.x + rect.width)/16); x++)
-//		{
-//			for (int y = (int)Math.floor(rect.y / 16); y <= Math.ceil((rect.y + rect.height)/16); y++)
-//			{
-//				if (map.get(x,y).solid)
-//				{
-//					physicsC.pos.x = (x + 1) * 16 + collisionC.width/2f;
-//					collisionC.getLeft(rect, physicsC.pos);
-//					System.out.println("collided left");
-//					System.out.println(x + " " + y);
-//					return;
-//				}
-//			}
-//		}
+		collisionC.getBody(rect, physicsC.pos);
+		for (int x = (int)(rect.x / 16); x < Math.ceil((rect.x + rect.width)/16); x++)
+		{
+			for (int y = (int)Math.floor(rect.y / 16); y <= Math.ceil((rect.y + rect.height)/16); y++)
+			{
+				if (map.get(x,y).solid)
+				{
+					physicsC.pos.x = (x + 1) * 16 + collisionC.width/2f;
+					collisionC.collisionBehavior.onLeft();
+					physicsC.vel.x = 0;
+					return;
+				}
+			}
+		}
 	}
 
 	private void checkRight(CollisionComponent collisionC, PhysicsComponent physicsC)
 	{
-//		collisionC.getRight(rect, physicsC.pos);
-//		for (int x = (int)Math.floor(rect.x / 16); x <= Math.ceil((rect.x + rect.width)/16); x++)
-//		{
-//			for (int y = (int)Math.floor(rect.y / 16); y <= Math.ceil((rect.y + rect.height)/16); y++)
-//			{
-//				if (map.get(x,y).solid)
-//				{
-//					physicsC.pos.x = (x) * 16 - collisionC.width/2f;
-//					collisionC.getRight(rect, physicsC.pos);
-//					System.out.println("collided right");
-//					System.out.println(x + " " + y);
-//					return;
-//				}
-//			}
-//		}
+		collisionC.getBody(rect, physicsC.pos);
+		for (int x = (int)(rect.x / 16); x < Math.ceil((rect.x + rect.width)/16); x++)
+		{
+			for (int y = (int)(rect.y / 16); y <= Math.ceil((rect.y + rect.height)/16); y++)
+			{
+				if (map.get(x,y).solid)
+				{
+					physicsC.pos.x = x * 16 - collisionC.width/2f;
+					collisionC.collisionBehavior.onRight();
+					physicsC.vel.x = 0;
+					return;
+				}
+			}
+		}
 	}
 
 }

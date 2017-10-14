@@ -7,6 +7,9 @@ import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 public class WalkState extends State<Player>
 {
 
+	final float WALK_MAX_SPEED = 90;
+	final float WALK_ACCEL = 9;
+	
 	public WalkState(StateMachine sm, Player player)
 	{
 		super(sm, player);
@@ -47,12 +50,16 @@ public class WalkState extends State<Player>
 		{
 			if (e.controlC.control.right)
 			{
-				e.physicsC.vel.x = 30;
+				e.playerC.facingLeft = false;
+				e.physicsC.vel.x += WALK_ACCEL;
 			}
 			else
 			{
-				e.physicsC.vel.x = -30;
+				e.playerC.facingLeft = true;
+				e.physicsC.vel.x -= WALK_ACCEL;
 			}
+			if (e.physicsC.vel.x > WALK_MAX_SPEED) {e.physicsC.vel.x = WALK_MAX_SPEED;}
+			if (e.physicsC.vel.x < -WALK_MAX_SPEED) {e.physicsC.vel.x = -WALK_MAX_SPEED;}
 		}
 	}
 }

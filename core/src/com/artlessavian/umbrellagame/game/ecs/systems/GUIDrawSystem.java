@@ -22,6 +22,5 @@ public class GUIDrawSystem extends EntitySystem
 	@Override
 	public void update(float deltaTime)
 	{
-		font.draw(batch, p.getComponent(StateComponent.class).state.getClass().getSimpleName(), 0, 0);
 	}
 }
