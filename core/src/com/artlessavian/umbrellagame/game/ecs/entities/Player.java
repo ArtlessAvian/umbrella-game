@@ -17,11 +17,12 @@ public class Player extends Entity
 		physicsC = new PhysicsComponent();
 		physicsC.vel.y = 30;
 		physicsC.vel.x = 30;
-		physicsC.gravityAcc = 3;
+		physicsC.gravityAcc = 30;
 		collisionC = new CollisionComponent();
 		controlC = new ControlComponent();
 		playerC = new PlayerComponent();
 		spriteC = new SpriteComponent();
+		spriteC.sprite.setSize(16, 16);
 		stateC = new StateComponent();
 
 		this.add(physicsC);

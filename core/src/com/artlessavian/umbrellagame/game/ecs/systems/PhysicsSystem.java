@@ -24,6 +24,7 @@ public class PhysicsSystem extends IteratingSystem
 
 		physicsC.pos.x += physicsC.vel.x * deltaTime;
 		physicsC.pos.y += physicsC.vel.y * deltaTime;
-		physicsC.pos.y += 1/2f * physicsC.gravityAcc * deltaTime * deltaTime;
+		physicsC.pos.y -= 1/2f * physicsC.gravityAcc * deltaTime * deltaTime;
+		physicsC.vel.y -= physicsC.gravityAcc * deltaTime;
 	}
 }
