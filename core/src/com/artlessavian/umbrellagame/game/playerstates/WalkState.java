@@ -8,8 +8,13 @@ import com.badlogic.gdx.graphics.Color;
 public class WalkState extends State<Player>
 {
 
+<<<<<<< HEAD
 	final float WALK_MAX_SPEED = 120;
 	final float WALK_ACCEL = 9;
+=======
+	final float WALK_MAX_SPEED = 200;
+	final float WALK_ACCEL = 3;
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 	
 	public WalkState(StateMachine sm, Player player)
 	{
@@ -31,11 +36,19 @@ public class WalkState extends State<Player>
 	@Override
 	public boolean checkTransition()
 	{
+<<<<<<< HEAD
 		if (e.controlC.control.dash)
 		{
 			sm.state = new DashState(sm, e);
 			return true;
 		}
+=======
+//		if (e.controlC.control.dash)
+//		{
+//			sm.state = new DashState(sm, e);
+//			return true;
+//		}
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		if (e.controlC.control.jump)
 		{
 			sm.state = new JumpState(sm, e, true);

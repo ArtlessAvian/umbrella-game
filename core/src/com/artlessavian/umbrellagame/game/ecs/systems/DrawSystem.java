@@ -5,10 +5,18 @@ import com.artlessavian.umbrellagame.game.Tile;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
+<<<<<<< HEAD
 import com.artlessavian.umbrellagame.game.ecs.entities.RainParticle;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+=======
+//import com.artlessavian.umbrellagame.game.ecs.entities.RainParticle;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -23,6 +31,10 @@ public class DrawSystem extends IteratingSystem
 	private OrthographicCamera camera;
 
 	private Texture cloun;
+<<<<<<< HEAD
+=======
+	private Texture rain;
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 
 	private Sprite tileFlyweight;
 
@@ -36,6 +48,10 @@ public class DrawSystem extends IteratingSystem
 		this.camera.position.set(map.getStart(), 0);
 //		this.camera.zoom = 5f;
 
+<<<<<<< HEAD
+=======
+		rain = new Texture("rain.png");
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		cloun = new Texture("cloun.png");
 
 		tileFlyweight = new Sprite();
@@ -44,7 +60,10 @@ public class DrawSystem extends IteratingSystem
 	@Override
 	public void update(float deltaTime)
 	{
+<<<<<<< HEAD
 //		for (int i = 0; i < 10; i++)
+=======
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 //		this.getEngine().addEntity(new RainParticle(p.physicsC.pos, 0, this.getEngine()));
 
 		camera.position.x = (camera.position.x * 49 + p.physicsC.vel.x + p.physicsC.pos.x) / 50;
@@ -56,6 +75,15 @@ public class DrawSystem extends IteratingSystem
 		{
 			batch.draw(cloun, -(camera.position.x / 3 % 300) + i * 300 - 100, 450 - 150);
 		}
+<<<<<<< HEAD
+=======
+
+		for (int i = 0; i < 100; i++)
+		{
+			batch.draw(rain, (float)(Math.sin(i + Gdx.graphics.getFrameId()) * 400 + 400), i * 450/100f);
+		}
+
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		for (int i = 0; i < 4; i++)
 		{
 			batch.draw(cloun, -(camera.position.x / 2 % 300) + i * 300 - 100, 450 - 100);

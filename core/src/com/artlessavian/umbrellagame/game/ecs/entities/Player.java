@@ -60,6 +60,15 @@ public class Player extends Entity
 		@Override
 		public void onLeft()
 		{
+<<<<<<< HEAD
+=======
+			if (stateC.state.getClass() == WallSlideState.class)
+			{
+				((WallSlideState)(stateC.state)).validSlide = 0;
+				return;
+			}
+
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 			if (physicsC.grounded)
 			{
 				stateC.state = new StandState(stateC.state.sm, (Player)stateC.state.e);
@@ -74,6 +83,15 @@ public class Player extends Entity
 		@Override
 		public void onRight()
 		{
+<<<<<<< HEAD
+=======
+			if (stateC.state.getClass() == WallSlideState.class)
+			{
+				((WallSlideState)(stateC.state)).validSlide = 0;
+				return;
+			}
+
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 			if (physicsC.grounded)
 			{
 				stateC.state = new StandState(stateC.state.sm, (Player)stateC.state.e);

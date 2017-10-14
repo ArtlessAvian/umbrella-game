@@ -27,7 +27,11 @@ public class Map implements MapInterface
 			tileSet[i] = Tile.valueOf(tileSetString[i]);
 		}
 
+<<<<<<< HEAD
 		Vector2 startPos = new Vector2();
+=======
+		startPos = new Vector2();
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 		String[] start = tokens[1].split(",");
 		startPos.x = Integer.parseInt(start[0]);
 		startPos.y = Integer.parseInt(start[1]);
@@ -52,7 +56,11 @@ public class Map implements MapInterface
 	@Override
 	public Vector2 getStart()
 	{
+<<<<<<< HEAD
 		return null;
+=======
+		return startPos;
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 	}
 
 	public Tile get(int x, int y)

@@ -29,5 +29,13 @@ public class PhysicsSystem extends IteratingSystem
 			physicsC.pos.y -= 1 / 2f * physicsC.gravityAcc * deltaTime * deltaTime;
 			physicsC.vel.y -= physicsC.gravityAcc * deltaTime;
 		}
+<<<<<<< HEAD
+=======
+
+//		if (physicsC.pos.y < -300)
+//		{
+//			getEngine().removeEntity(entity);
+//		}
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 	}
 }

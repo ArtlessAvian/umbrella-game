@@ -5,7 +5,11 @@ import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 import com.badlogic.gdx.graphics.Color;
 
+<<<<<<< HEAD
 public class 	FastFallState extends State<Player>
+=======
+public class FastFallState extends State<Player>
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 {
 	final float FAST_FALL_MAX_SPEED = 300;
 
@@ -33,6 +37,15 @@ public class 	FastFallState extends State<Player>
 
 		if (e.physicsC.vel.y < -FAST_FALL_MAX_SPEED) {e.physicsC.vel.y = -FAST_FALL_MAX_SPEED;}
 
+<<<<<<< HEAD
 		CommonFuncs.editWet(e.playerC, -0.3f, deltaT);
+=======
+		if (e.controlC.control.left != e.controlC.control.right)
+		{
+			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, JumpState.AIR_ACCEL, JumpState.MAX_AIR_SPEED);
+		}
+
+		CommonFuncs.editWet(e.playerC, -0.2f, deltaT);
+>>>>>>> 64e1650beff4a48aa3f8cbcadc562834efb906e2
 	}
 }
