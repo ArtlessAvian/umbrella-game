@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Maineroni extends Game
 {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	BitmapFont font;
 	
 	@Override
@@ -21,7 +21,7 @@ public class Maineroni extends Game
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.3f, 0.2f, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		super.render();
 	}

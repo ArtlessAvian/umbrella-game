@@ -1,7 +1,9 @@
 package com.artlessavian.umbrellagame.game;
 
 import com.artlessavian.umbrellagame.Maineroni;
+import com.artlessavian.umbrellagame.game.ecs.entities.Player;
 import com.artlessavian.umbrellagame.game.ecs.systems.CollisionSystem;
+import com.artlessavian.umbrellagame.game.ecs.systems.DrawSystem;
 import com.artlessavian.umbrellagame.game.ecs.systems.PhysicsSystem;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Screen;
@@ -11,6 +13,8 @@ public class GameScreen implements Screen
 	private Maineroni main;
 	private Engine engine;
 
+	DrawSystem drawSystem;
+
 	public GameScreen(Maineroni main)
 	{
 		this.main = main;
@@ -19,6 +23,11 @@ public class GameScreen implements Screen
 		engine.addSystem(new PhysicsSystem());
 		engine.addSystem(new CollisionSystem(null));
 //		engine.addSystem(new PhysicsSystem());
+		drawSystem = new DrawSystem(main.batch);
+		drawSystem.setProcessing(false);
+		engine.addSystem(drawSystem);
+
+		engine.addEntity(new Player());
 	}
 
 	@Override
@@ -38,7 +47,7 @@ public class GameScreen implements Screen
 		{
 			engine.update(updateRate);
 		}
-
+		drawSystem.update(0);
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package com.artlessavian.umbrellagame.game.ecs.components;
 
-public class ControlComponent
+import com.badlogic.ashley.core.Component;
+
+public class ControlComponent implements Component
 {
-	ControlComponent control;
+	public ControlComponent control;
 }
