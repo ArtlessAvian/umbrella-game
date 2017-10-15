@@ -55,6 +55,7 @@ public class HitboxCollisionSystem extends EntitySystem
 				{
 					continue;
 				}
+				if (e2.getComponent(HitboxComponent.class).iframes > 0) {continue;}
 				if (e1.getComponent(HitboxComponent.class).hitbox == null) {continue;}
 				if (e1.getComponent(HitboxComponent.class).cannotHit.contains(e2))
 				{continue;}
@@ -67,6 +68,14 @@ public class HitboxCollisionSystem extends EntitySystem
 					e1.getComponent(HitboxComponent.class).behavior.onHit(e1, e2);
 					e2.getComponent(HitboxComponent.class).behavior.onGetHit(e2, e1);
 				}
+			}
+		}
+
+		for (Entity e : entities)
+		{
+			if (e.getComponent(HitboxComponent.class).iframes > 0)
+			{
+				e.getComponent(HitboxComponent.class).iframes -= delta;
 			}
 		}
 	}

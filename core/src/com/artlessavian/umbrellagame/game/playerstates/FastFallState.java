@@ -37,12 +37,10 @@ public class FastFallState extends State<Player>
 	{
 		if (e.physicsC.vel.y < -FAST_FALL_MAX_SPEED) {e.physicsC.vel.y = -FAST_FALL_MAX_SPEED;}
 
-		CommonFuncs.editWet(e.playerC, -0.3f, deltaT);
+		CommonFuncs.editWet(e.playerC, -0.1f, deltaT);
 		if (e.controlC.control.left != e.controlC.control.right)
 		{
 			CommonFuncs.accelX(e.physicsC, e.controlC.control.right, JumpState.AIR_ACCEL, JumpState.MAX_AIR_SPEED);
 		}
-
-		CommonFuncs.editWet(e.playerC, -0.2f, deltaT);
 	}
 }

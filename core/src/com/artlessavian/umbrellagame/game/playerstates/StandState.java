@@ -62,6 +62,6 @@ public class StandState extends State<Player>
 
 		e.physicsC.vel.y = 0;
 
-		CommonFuncs.editWet(e.playerC, 0.02f, deltaT);
+//		CommonFuncs.editWet(e.playerC, 0.02f, deltaT);
 	}
 }

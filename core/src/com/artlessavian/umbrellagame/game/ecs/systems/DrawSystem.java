@@ -3,6 +3,7 @@ package com.artlessavian.umbrellagame.game.ecs.systems;
 import com.artlessavian.umbrellagame.Maineroni;
 import com.artlessavian.umbrellagame.game.AutoMap;
 import com.artlessavian.umbrellagame.game.Tile;
+import com.artlessavian.umbrellagame.game.ecs.components.HitboxComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.PhysicsComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.PlayerComponent;
 import com.artlessavian.umbrellagame.game.ecs.components.SpriteComponent;
@@ -39,6 +40,7 @@ public class DrawSystem extends IteratingSystem
 		this.p = p;
 		this.camera = new OrthographicCamera(400, 225);
 		this.camera.position.set(map.getStart(), 0);
+		this.camera.position.scl(16);
 //		this.camera.zoom = 5f;
 
 		rain = new Texture("rain.png");
@@ -60,9 +62,14 @@ public class DrawSystem extends IteratingSystem
 			batch.draw(cloun, -(camera.position.x / 3 % 300) + i * 300 - 100, 450 - 150);
 		}
 
-		for (int i = 0; i < 100; i++)
+		float speed = 100f;
+
+		for (int j = 0; j < 4; j++)
 		{
-			batch.draw(rain, (float)(Math.sin(i + Gdx.graphics.getFrameId()) * 400 + 400), (float)(Math.sqrt(i) * 450/10f));
+			for (int i = 0; i < 100; i++)
+			{
+				batch.draw(rain, (float)(Math.sin(i + Gdx.graphics.getFrameId()) * 400 + 400), (float)(j * 3 + i * 450/100));
+			}
 		}
 
 		for (int i = 0; i < 4; i++)
@@ -100,16 +107,18 @@ public class DrawSystem extends IteratingSystem
 		SpriteComponent spriteC = entity.getComponent(SpriteComponent.class);
 		PhysicsComponent physicsC = entity.getComponent(PhysicsComponent.class);
 		PlayerComponent playerC = entity.getComponent(PlayerComponent.class);
+		HitboxComponent hitboxC = entity.getComponent(HitboxComponent.class);
 
 		if (physicsC != null)
 		{
 			spriteC.sprite.setCenter(physicsC.pos.x, physicsC.pos.y);
 		}
-		if (playerC != null)
+		if (hitboxC != null && hitboxC.iframes > 0 && Gdx.graphics.getFrameId() % 2 == 0)
 		{
-			spriteC.sprite.setFlip(physicsC.facingLeft, false);
+			return;
 		}
 
+		spriteC.sprite.setFlip(physicsC.facingLeft, false);
 		spriteC.sprite.draw(batch);
 	}
 }

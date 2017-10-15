@@ -30,41 +30,35 @@ public class AutoMap
 
 	public int getBiome(float x)
 	{
-		return (int)(Math.tan(x/100)) % 1;
+		return (int)(Math.abs(Math.tan(x / 30))) % 2;
 	}
 
-	public float spikeVariation(float x)
-	{
-//		return 1;
-		return (float)(square(x / 20, 0.1f) * Math.abs(Math.sin(x / 2)) * 2);
-	}
-
-	public float holeVariation(float x)
-	{
-		return (float)(Math.sin(x/3) * Math.sin(x/8) * 3 - Math.sin(x/7)) * 2 + 18;
-	}
+//	public float spikeVariation(float x)
+//	{
+////		return 1;
+//		return (float)(square(x / 20, 0.1f) * Math.abs(Math.sin(x / 2)) * 2);
+//	}
+//
+//	public float holeVariation(float x)
+//	{
+//		return (float)(Math.sin(x/3) * Math.sin(x/8) * 3 - Math.sin(x/7)) * 2 + 18;
+//	}
 
 	public float cityVariation(float x)
 	{
-		return (float)(square(x / 8, 0.6f));
+		return (float)(square(x / 20, 0.6f) * ((Math.sin(x/10) + 3) / 4) * 40);
 	}
 
 //	@Override
 	public Vector2 getStart()
 	{
-		return new Vector2(30, mainTerrain(30) + 5);
+		return new Vector2(15, mainTerrain(15) + 5);
 	}
 
 	public Tile get(int x, int y)
 	{
 		float magic = mainTerrain(x);
-//		switch (getBiome(x))
-//		{
-//			case 0 : {magic += spikeVariation(x); break;}
-////			case 1 : {magic += holeVariation(x); break;}
-////			case 2 : {magic += 0; break;}
-////			case 3 : {magic = Math.max(magic, 35); break;}
-//		}
+		int biome = getBiome(x);
 
 		if (magic > y)
 		{
@@ -81,6 +75,14 @@ public class AutoMap
 		}
 		else
 		{
+			if (biome == 1)
+			{
+				if (cityVariation(x) > y)
+				{
+					return STONE2;
+				}
+			}
+
 			return AIR;
 		}
 	}
