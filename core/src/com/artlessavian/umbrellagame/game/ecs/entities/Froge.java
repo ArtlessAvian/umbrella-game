@@ -5,6 +5,8 @@ import com.artlessavian.umbrellagame.game.State;
 import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.components.*;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -31,13 +33,12 @@ public class Froge extends Entity
 		stateC.state = new FrogeState(stateC, this, p);
 
 		spriteC = new SpriteComponent();
-		spriteC.sprite = new Sprite(new Texture("Grid.png"));
-		spriteC.sprite.setSize(10, 10);
+		spriteC.sprite = new Sprite(new Texture("froge.png"));
 
 		hitboxC = new HitboxComponent();
 		hitboxC.behavior = new FrogeHitBehavior();
-		hitboxC.hurtbox = new OffsetRectangle(-5, -5, 10, 10);
-		hitboxC.hitbox = new OffsetRectangle(-5, -5, 10, 10);
+		hitboxC.hurtbox = new OffsetRectangle(-10, -10, 20, 20);
+		hitboxC.hitbox = new OffsetRectangle(-10, -10, 20, 20);
 		this.add(hitboxC);
 
 		add(physicsC);
@@ -67,19 +68,21 @@ public class Froge extends Entity
 		@Override
 		public void update(float deltaT)
 		{
-//			counter += deltaT;
-//			if (counter > 1.1f && physicsC.grounded)
-//			{
-//				counter -= 1.1;
-//
-//				physicsC.vel.y = (float)(Math.random() * 100 + 50);
-//				physicsC.vel.x = 50 / (physicsC.vel.y * 2 / physicsC.gravityAcc);
-//				physicsC.grounded = false;
-//				if (p.physicsC.pos.x < e.physicsC.pos.x)
-//				{
-//					physicsC.vel.x *= -1;
-//				}
-//			}
+			counter += deltaT;
+			if (counter > 3.1f && physicsC.grounded)
+			{
+				counter -= 3.1;
+
+				physicsC.vel.y = (float)(Math.random() * 150 + 100);
+				physicsC.vel.x = 50 / (physicsC.vel.y * 2 / physicsC.gravityAcc);
+				physicsC.grounded = false;
+				physicsC.facingLeft = false;
+				if (p.physicsC.pos.x < e.physicsC.pos.x)
+				{
+					physicsC.vel.x *= -1;
+					physicsC.facingLeft = true;
+				}
+			}
 		}
 	}
 
@@ -116,28 +119,34 @@ public class Froge extends Entity
 		}
 	}
 
+	static Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/Moderate Hit 2 (JAP).wav"));
+	static Sound sound2 = Gdx.audio.newSound(Gdx.files.internal("sound/Small Hit 2 (JAP).wav"));
+
 	private class FrogeHitBehavior implements HitboxComponent.HitBehavior
 	{
-		int counter = 3;
+		int counter = 2;
 
 		@Override
 		public void onHit(Entity thisEntity, Entity other)
 		{
-
+			sound2.play();
 		}
 
 		@Override
 		public void onGetHit(Entity thisEntity, Entity other)
 		{
+			sound.play();
+
 			counter--;
 			if (counter == 0)
 			{
 				thisEntity.add(new RemoveMeComponent());
+				other.getComponent(PlayerComponent.class).wetness += 0.2;
 				return;
 			}
 
 			PhysicsComponent component = other.getComponent(PhysicsComponent.class);
-			physicsC.vel.x = 70;
+			physicsC.vel.x = (float)(Math.random() * 70 + 70);
 			physicsC.grounded = false;
 			physicsC.vel.x = physicsC.vel.x * Math.signum(physicsC.pos.x - component.pos.x);
 			physicsC.vel.y = 200;

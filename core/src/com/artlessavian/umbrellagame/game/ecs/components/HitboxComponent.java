@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class HitboxComponent implements Component
 {
+
 	public interface HitBehavior
 	{
 		void onHit(Entity thisEntity, Entity other);
@@ -19,6 +20,7 @@ public class HitboxComponent implements Component
 	public OffsetRectangle hitbox;
 	public OffsetRectangle hurtbox;
 
+	public float iframes;
 	public ArrayList<Entity> cannotHit;
 	public int team = 1;
 

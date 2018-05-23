@@ -147,18 +147,22 @@ public class Maineroni extends Game
 
 		super.render();
 
-		batch.setProjectionMatrix(screenSpace.combined);
-		batch.begin();
+		if (!onComputerDebug)
+		{
 
-		swing.draw(batch);
-		jump.draw(batch);
-		up.draw(batch);
-		down.draw(batch);
-		right.draw(batch);
-		left.draw(batch);
+			batch.setProjectionMatrix(screenSpace.combined);
+			batch.begin();
 
-		batch.end();
+			swing.draw(batch);
+			jump.draw(batch);
+			up.draw(batch);
+			down.draw(batch);
+			right.draw(batch);
+			left.draw(batch);
 
+			batch.end();
+
+		}
 	}
 	
 	@Override

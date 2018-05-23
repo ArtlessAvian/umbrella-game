@@ -10,4 +10,7 @@ public class PlayerComponent implements Component
 
 
 	public float wetness = 1; // is actually dryness lmao
+
+	public float furthestRight = 0;
+	public float kills = 0;
 }
