@@ -1,6 +1,7 @@
 package com.artlessavian.umbrellagame.game.ecs.entities;
 
 import com.artlessavian.umbrellagame.game.ControlContainer;
+import com.artlessavian.umbrellagame.game.GameScreen;
 import com.artlessavian.umbrellagame.game.OffsetRectangle;
 import com.artlessavian.umbrellagame.game.ecs.components.*;
 import com.artlessavian.umbrellagame.game.playerstates.*;
@@ -18,14 +19,16 @@ public class Player extends Entity
 	public PlayerComponent playerC;
 	public SpriteComponent spriteC;
 	public StateComponent stateC;
+	private GameScreen screen;
 
-	public Player(ControlContainer cc, Vector2 start)
+	public Player(ControlContainer cc, Vector2 start, GameScreen screen)
 	{
+		this.screen = screen;
 		physicsC = new PhysicsComponent();
 		physicsC.pos.set(start);
 		physicsC.pos.scl(16);
 		physicsC.vel.y = 0;
-		physicsC.vel.x = 100;
+		physicsC.vel.x = 20;
 		physicsC.gravityAcc = 180;
 		physicsC.grounded = false;
 
@@ -134,7 +137,14 @@ public class Player extends Entity
 		@Override
 		public void onGetHit(Entity thisEntity, Entity other)
 		{
-			playerC.wetness -= 0.3;
+			hitboxC.iframes = 2f;
+			playerC.wetness -= 0.15f;
+
+			stateC.state = new JumpState(stateC, (Player)thisEntity, false);
+			physicsC.vel.x = 70;
+			physicsC.grounded = false;
+			physicsC.vel.x = physicsC.vel.x * Math.signum(physicsC.pos.x - other.getComponent(PhysicsComponent.class).pos.x);
+			physicsC.vel.y = 100;
 		}
 	}
 }

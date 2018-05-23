@@ -3,6 +3,8 @@ package com.artlessavian.umbrellagame.game.playerstates;
 import com.artlessavian.umbrellagame.game.State;
 import com.artlessavian.umbrellagame.game.StateMachine;
 import com.artlessavian.umbrellagame.game.ecs.entities.Player;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 
 public class WallSlideState extends State<Player>
@@ -31,6 +33,9 @@ public class WallSlideState extends State<Player>
 
 	}
 
+
+	static Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/Slide.wav"));
+
 	@Override
 	public boolean checkTransition()
 	{
@@ -52,6 +57,7 @@ public class WallSlideState extends State<Player>
 				e.physicsC.vel.x = 85;
 			}
 			e.physicsC.vel.y = 180;
+			sound.play();
 			sm.state = new JumpState(sm, e, false);
 			return true;
 		}
@@ -88,6 +94,6 @@ public class WallSlideState extends State<Player>
 		{
 			e.physicsC.vel.x = -1;
 		}
-		CommonFuncs.editWet(e.playerC, -0.2f, deltaT);
+		CommonFuncs.editWet(e.playerC, -0.05f, deltaT);
 	}
 }

@@ -23,12 +23,17 @@ public class PVESystem extends IntervalSystem
 	@Override
 	protected void updateInterval()
 	{
-//		temp.x = (int)p.physicsC.pos.x;
-//		temp.y = map.mainTerrain(temp.x);
-		temp.x = p.physicsC.pos.x + 450;
-		temp.y = 16 * map.mainTerrain(temp.x / 16) + 16;
-//		temp.y = p.physicsC.pos.y;
-//		getEngine().addEntity(new BugThing(temp, p));
+		if (Math.random() < 0.5)
+		{
+			temp.x = p.physicsC.pos.x + 250;
+			temp.y = 16 * map.mainTerrain(temp.x / 16) + 16;
+		}
+		else
+		{
+			temp.x = p.physicsC.pos.x - 100;
+			temp.y = 16 * map.mainTerrain(temp.x / 16) + 400;
+		}
+
 		getEngine().addEntity(new Froge(temp, p));
 	}
 }

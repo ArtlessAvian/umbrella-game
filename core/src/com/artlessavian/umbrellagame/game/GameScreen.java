@@ -23,6 +23,7 @@ public class GameScreen implements Screen
 	DebugDrawSystem debugDrawSystem;
 
 	Player p;
+	public boolean gameOver;
 
 	public GameScreen(Maineroni main)
 	{
@@ -33,7 +34,7 @@ public class GameScreen implements Screen
 //		map = new Map("levels/1.txt");
 		map = new AutoMap();
 
-		p = new Player(main.control, map.getStart());
+		p = new Player(main.control, map.getStart(), this);
 		engine.addEntity(p);
 
 		engine.addSystem(new StateSystem());
@@ -87,10 +88,16 @@ public class GameScreen implements Screen
 			engine.update(updateRate);
 		}
 
+		if (p.playerC.wetness <= 0)
+		{
+			main.setScreen(new DeadScreen(main, this, p));
+			System.out.println("im ded");
+		}
+
 		main.batch.begin();
 		drawSystem.update(0);
 		guiDrawSystem.update(0);
-		debugDrawSystem.update(0);
+//		debugDrawSystem.update(0);
 		main.batch.end();
 	}
 
